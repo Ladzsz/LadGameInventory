@@ -32,8 +32,8 @@ const getCategoryByIdController = async (req, res) => {
 
 const createCategoryController = async (req, res) => {
   try {
-    const { name } = req.body;
-    const newCategory = await createCategory(name);
+    const { name, description } = req.body;
+    const newCategory = await createCategory(name, description);
     res.status(201).json(newCategory);
   } catch (err) {
     console.error('ERROR:', err.message);
@@ -43,8 +43,8 @@ const createCategoryController = async (req, res) => {
 
 const updateCategoryController = async (req, res) => {
   try {
-    const { name } = req.body;
-    const updatedCategory = await updateCategory(req.params.id, name);
+    const { name, description } = req.body;
+    const updatedCategory = await updateCategory(req.params.id, name, description);
     if (!updatedCategory) {
       return res.status(404).json({ error: 'Category not found' });
     }
