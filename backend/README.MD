@@ -1,8 +1,5 @@
----
 
-# **Backend README (`backend/README.md`)**
 
-```markdown
 # Backend - GameInventory
 
 This is the **Express backend** for the GameInventory app.  
@@ -31,3 +28,4 @@ backend/
 - CORS and Morgan for middleware/logging
 
 ---
+
