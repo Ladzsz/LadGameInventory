@@ -36,7 +36,8 @@ project/
 ├── UI/
 │ └── pages/ # HTML pages
 ├── routes/ # API routes
-├── db.js # Database connection (optional)
+|-- controllers/ # API controllers
+|-- model/ # API database logic
 ├── .env # Environment variables
 └── package.json
 
