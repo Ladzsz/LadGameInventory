@@ -1,30 +1,28 @@
 # GameInventory
 
-A small **game inventory management** app built with **Node.js, Express, and PostgreSQL**.  
-Users can **CRUD games** by **category/genre** (Action, Platformer, Shooter, Horror, RPG).
+A small game inventory management app built with **Node.js**, **Express**, **React**, and **PostgreSQL**.  
+Users can **CRUD games by category/genre** (Action, Platformer, Shooter, Horror, RPG).
 
 ---
 
 ## 🛠️ Features
-
-- User authentication (optional, can be added later)  
-- Add, view, update, and delete games  
-- Organize games by **genre/category**  
-- Frontend powered by REACT jsx 
-- Backend powered by **Express.js**  
-- Database handled with **PostgreSQL**  
+- User authentication (optional, can be added later)
+- Add, view, update, and delete games
+- Organize games by genre/category
+- Frontend powered by **React JSX**
+- Backend powered by **Express.js**
+- Database handled with **PostgreSQL**
 
 ---
 
 ## ⚡ Tech Stack
-
-- Node.js
-- REACT
-- Express.js  
-- PostgreSQL  
-- dotenv for environment variables  
-- pg for database connection  
-- CORS and Morgan for middleware/logging  
+- **Node.js**
+- **React**
+- **Express.js**
+- **PostgreSQL**
+- **dotenv** for environment variables
+- **pg** for database connection
+- **CORS** and **Morgan** for middleware/logging
 
 ---
 
@@ -32,39 +30,53 @@ Users can **CRUD games** by **category/genre** (Action, Platformer, Shooter, Hor
 
 project/
 │
-├── backend/                  # Express backend
-│   ├── app.js                # Express app configuration
-│   ├── server.js             # Entry point for the backend
-│   ├── routes/               # API routes
-│   ├── controllers/          # Route controllers / business logic
-│   ├── model/                # Database models / queries
-│   ├── .env                  # Environment variables
-│   └── package.json          # Backend dependencies
-│   ├── README.md             #backend documentation
+├── backend/ # Express backend
+│ ├── app.js # Express app configuration
+│ ├── server.js # Entry point for backend
+│ ├── routes/ # API routes
+│ ├── controllers/ # Route controllers / business logic
+│ ├── model/ # Database models / queries
+│ ├── .env # Environment variables
+│ └── package.json # Backend dependencies
+│ └── README.md # Backend documentation
 │
-├── frontend/                 # React frontend
-│   ├── package.json          # Frontend dependencies
-│   ├── README.md             #frontend documentation
-│   ├── UI/                   # Main UI folder
-│      └── src/               # React source code
-│         ├── App.jsx         # main app file
-│         ├── components/      # components
-│         ├── assets/         #styles and images
+├── frontend/ # React frontend
+│ ├── package.json # Frontend dependencies
+│ ├── UI/ # Main UI folder
+│ │ └── pages/ # JSX pages/components
+│ └── src/ # React source code
+│ ├── App.jsx # Main React app component
+│ ├── components/ # Header, Footer, Content, etc.
+│ ├── assets/ # Styles, images
+│ └── README.md # Frontend documentation
 │
-└── README.md                 # Project documentation
-
+└── README.md # Root documentation
 
 ---
 
 ## 🚀 Installation
 
-1. Clone the repo:
+1. **Clone the repo**:
 
-```bash
+```
 git clone <your-repo-url>
 cd GameInventory
 
-2. install dependencies
+```
 
-```bash
+2. Install backend dependencies
+
+ ```
+cd backend
 npm install
+
+```
+3. Install fronend dependencies
+
+```
+cd ../frontend/UI
+npm install
+
+```
+4. Running the app (add this later when finished)
+   
