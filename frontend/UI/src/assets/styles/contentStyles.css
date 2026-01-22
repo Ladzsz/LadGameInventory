@@ -1,0 +1,6 @@
+/* Main content area */
+.app-main {
+  flex: 1; 
+  padding: 20px; 
+  background-color: #181a1f; 
+}

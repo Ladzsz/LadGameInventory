@@ -1,0 +1,9 @@
+/*styling footer*/
+footer {
+  background-color: #20232a;
+  color: #9aa0aa;
+  padding: 12px 20px;
+  border-top: 1px solid #2f333d;
+  text-align: center;
+  font-size: 0.9rem;
+}
