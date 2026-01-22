@@ -17,14 +17,6 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve static HTML, CSS, JS
-app.use(express.static(path.join(__dirname, 'UI')));
-
-// Serve main HTML file
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'UI', 'pages', 'index.html'));
-});
-
 // Define routes 
 app.use('/api/users', userRoutes);
 app.use('/api/games', gameRoutes);
