@@ -10,7 +10,7 @@ Users can **CRUD games** by **category/genre** (Action, Platformer, Shooter, Hor
 - User authentication (optional, can be added later)  
 - Add, view, update, and delete games  
 - Organize games by **genre/category**  
-- Simple static frontend with **HTML/CSS** (`UI/pages/`)  
+- Frontend powered by REACT jsx 
 - Backend powered by **Express.js**  
 - Database handled with **PostgreSQL**  
 
@@ -18,7 +18,8 @@ Users can **CRUD games** by **category/genre** (Action, Platformer, Shooter, Hor
 
 ## ⚡ Tech Stack
 
-- Node.js  
+- Node.js
+- REACT
 - Express.js  
 - PostgreSQL  
 - dotenv for environment variables  
@@ -31,15 +32,27 @@ Users can **CRUD games** by **category/genre** (Action, Platformer, Shooter, Hor
 
 project/
 │
-├── app.js # Express app configuration
-├── server.js # Entry point
-├── UI/
-│ └── pages/ # HTML pages
-├── routes/ # API routes
-|-- controllers/ # API controllers
-|-- model/ # API database logic
-├── .env # Environment variables
-└── package.json
+├── backend/                  # Express backend
+│   ├── app.js                # Express app configuration
+│   ├── server.js             # Entry point for the backend
+│   ├── routes/               # API routes
+│   ├── controllers/          # Route controllers / business logic
+│   ├── model/                # Database models / queries
+│   ├── .env                  # Environment variables
+│   └── package.json          # Backend dependencies
+│   ├── README.md             #backend documentation
+│
+├── frontend/                 # React frontend
+│   ├── package.json          # Frontend dependencies
+│   ├── README.md             #frontend documentation
+│   ├── UI/                   # Main UI folder
+│      └── src/               # React source code
+│         ├── App.jsx         # main app file
+│         ├── components/      # components
+│         ├── assets/         #styles and images
+│
+└── README.md                 # Project documentation
+
 
 ---
 
