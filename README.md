@@ -79,4 +79,10 @@ npm install
 
 ```
 4. Running the app (add this later when finished)
-   
+
+
+---   
+## Credits
+
+The error style used across this project was adapted from [AntiKippi](https://github.com/AntiKippi/errorpages). 
+Many thanks for making it available under a free license!
