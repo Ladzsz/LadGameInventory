@@ -1,0 +1,29 @@
+<!--
+Custom error style used by a GitHubUser
+Original source: https://github.com/AntiKippi/errorpages
+Used with permission under the license provided by the author
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>403 - Forbidden</title>
+
+  <!-- Prefetch the resources to mostly avoid the page appearing without style or with the wrong font directly after loading -->
+  <link rel="preload" href="/styles/errorpage.css" as="style" />
+  <link rel="preload" href="/fonts/Iosevka_ASCII.woff2" as="font" />
+ 
+  <link rel="stylesheet" href="/styles/errorpage.css" />
+</head>
+<body>
+  <div class="wrapper">
+    <div class="container">
+      <h1 class="glitch" data-text="403">403</h1>
+      <p class="subtext">Forbidden</p>
+      <p class="desc">You are not allowed to access this page</p>
+      <p style="font-size: 64px;">&nbsp;</p>
+    </div>
+  </div>
+</body>
+</html>

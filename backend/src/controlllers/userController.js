@@ -13,8 +13,8 @@ const getUsersController = async (req, res) => {
     const users = await getUsers();
     res.status(200).json(users);
   } catch (err) {
-    console.error("ERROR:", err.message);
-    res.status(500).json({ error: "Internal Server Error" });
+    console.error('ERROR:', err.message);
+    next(err); 
   }
 };
 
@@ -26,8 +26,8 @@ const getUserByIdController = async (req, res) => {
     }
     res.status(200).json(user);
   } catch (err) {
-    console.error("ERROR:", err.message);
-    res.status(500).json({ error: "Internal Server Error" });
+    console.error('ERROR:', err.message);
+    next(err); 
   }
 };
 
@@ -37,8 +37,8 @@ const createUserController = async (req, res) => {
     const newUser = await createUser(username, email, password);
     res.status(201).json(newUser);
   } catch (err) {
-    console.error("ERROR:", err.message);
-    res.status(500).json({ error: "Internal Server Error" });
+    console.error('ERROR:', err.message);
+    next(err); 
   }
 };
 
@@ -56,8 +56,8 @@ const updateUserController = async (req, res) => {
     }
     res.status(200).json(updatedUser);
   } catch (err) {
-    console.error("ERROR:", err.message);
-    res.status(500).json({ error: "Internal Server Error" });
+    console.error('ERROR:', err.message);
+    next(err); 
   }
 };
 
@@ -66,8 +66,8 @@ const deleteUserController = async (req, res) => {
     await deleteUser(req.params.id);
     res.status(204).send();
   } catch (err) {
-    console.error("ERROR:", err.message);
-    res.status(500).json({ error: "Internal Server Error" });
+    console.error('ERROR:', err.message);
+    next(err); 
   }
 };
 

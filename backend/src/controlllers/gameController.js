@@ -15,8 +15,8 @@ const getAllGamesConroller = async (req, res) => {
     const games = await getGames();
     res.status(200).json(games);
   } catch (err) {
-    console.error("ERROR:", err.message);
-    res.status(500).json({ error: "Internal Server Error" });
+    console.error('ERROR:', err.message);
+    next(err); 
   }
 };
 
@@ -28,8 +28,8 @@ const getGameByIdController = async (req, res) => {
     }
     res.status(200).json(game);
   } catch (err) {
-    console.error("ERROR:", err.message);
-    res.status(500).json({ error: "Internal Server Error" });
+    console.error('ERROR:', err.message);
+    next(err); 
   }
 };
 
@@ -39,8 +39,8 @@ const createGameController = async (req, res) => {
     const newGame = await createGame(name, description, category_id, user_id, quantity);
     res.status(201).json(newGame);
   } catch (err) {
-    console.error("ERROR:", err.message);
-    res.status(500).json({ error: "Internal Server Error" });
+    console.error('ERROR:', err.message);
+    next(err); 
   }
 };
 
@@ -60,8 +60,8 @@ const updateGameController = async (req, res) => {
     }
     res.status(200).json(updatedGame);
   } catch (err) {
-    console.error("ERROR:", err.message);
-    res.status(500).json({ error: "Internal Server Error" });
+    console.error('ERROR:', err.message);
+    next(err); 
   }
 };
 
@@ -70,8 +70,8 @@ const deleteGameController = async (req, res) => {
     await deleteGame(req.params.id);
     res.status(204).send();
   } catch (err) {
-    console.error("ERROR:", err.message);
-    res.status(500).json({ error: "Internal Server Error" });
+    console.error('ERROR:', err.message);
+    next(err); 
   }
 };
 
@@ -81,8 +81,8 @@ const getGamesByCategoryController = async (req, res) => {
     const games = await getGameByCategory(category_id);
     res.status(200).json(games);
   } catch (err) {
-    console.error("ERROR:", err.message);
-    res.status(500).json({ error: "Internal Server Error" });
+    console.error('ERROR:', err.message);
+    next(err); 
   }
 };
 
@@ -92,8 +92,8 @@ const getGamesByUserController = async (req, res) => {
     const games = await getGameByuserId(user_id);
     res.status(200).json(games);
   } catch (err) {
-    console.error("ERROR:", err.message);
-    res.status(500).json({ error: "Internal Server Error" });
+    console.error('ERROR:', err.message);
+    next(err); 
   }
 };
 
