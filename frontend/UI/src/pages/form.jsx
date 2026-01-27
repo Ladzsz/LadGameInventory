@@ -2,21 +2,19 @@ import React from "react";
 import "../assets/styles/form.css";
 
 function GameForm({
-    //setting form fields to either edit or new
+  //setting form fields to either edit or new
   gameId = null,
   initialData = {},
   onSuccess,
 }) {
   const [name, setName] = React.useState(initialData.name || "");
   const [description, setDescription] = React.useState(
-    initialData.description || ""
+    initialData.description || "",
   );
   const [categoryId, setCategoryId] = React.useState(
-    initialData.category_id || ""
+    initialData.category_id || "",
   );
-  const [quantity, setQuantity] = React.useState(
-    initialData.quantity || 1
-  );
+  const [quantity, setQuantity] = React.useState(initialData.quantity || 1);
 
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
@@ -44,7 +42,7 @@ function GameForm({
             "Content-Type": "application/json",
           },
           body: JSON.stringify(payload),
-        }
+        },
       );
 
       if (!response.ok) {
@@ -69,9 +67,7 @@ function GameForm({
   //creating form
   return (
     <form className="game-form" onSubmit={handleSubmit}>
-      <h2 className="game-form__title">
-        {gameId ? "Edit Game" : "Add Game"}
-      </h2>
+      <h2 className="game-form__title">{gameId ? "Edit Game" : "Add Game"}</h2>
 
       {error && <p className="game-form__error">{error}</p>}
 

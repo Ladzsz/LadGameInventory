@@ -77,7 +77,9 @@
   border: 1px solid #2f333d;
   background-color: #20232a;
   color: #dcdcdc;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .btn:hover {

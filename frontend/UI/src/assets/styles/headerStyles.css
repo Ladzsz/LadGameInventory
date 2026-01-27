@@ -18,20 +18,20 @@ header {
 
 /* Styling link text */
 nav > a {
-    font-size: 1.4rem;
+  font-size: 1.4rem;
 }
 
 /* Styling header navbar */
 #header-navbar {
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 /* Styling image */
 img {
-    width: 80px;
-    height: 80px;
+  width: 80px;
+  height: 80px;
 }
 
 /* media queries */

@@ -8,17 +8,18 @@ It handles all UI, and interacts with the backend API.
 ## 📂 Structure
 
 frontend/
-├── package.json          # Frontend dependencies
-├── UI/                   # Main UI folder
-│   ├── src/              # React source code
-│   ├── App.jsx           # Main React app component
-│   ├── components/       # Reusable components.
-│   └── assets/           # Images and styles
-└── README.md             # Frontend documentation
+├── package.json # Frontend dependencies
+├── UI/ # Main UI folder
+│ ├── src/ # React source code
+│ ├── App.jsx # Main React app component
+│ ├── components/ # Reusable components.
+│ └── assets/ # Images and styles
+└── README.md # Frontend documentation
 
 ---
 
 ## ⚡ Tech Stack
+
 - React (JSX)
 - CSS / Styling
 - Optional libraries: Tailwind, Styled-Components, or others

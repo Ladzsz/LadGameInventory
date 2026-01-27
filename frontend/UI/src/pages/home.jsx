@@ -1,6 +1,6 @@
 import React from "react";
 import "../assets/styles/home.css";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
@@ -16,9 +16,8 @@ const HomePage = () => {
         <h2 className="homepage__heading">What is this site?</h2>
         <p className="homepage__text">
           Game Inventory Manager is a simple tool that lets you keep track of
-          your video game collection by category. Whether you organize by
-          genre, platform, or custom tags, this site keeps everything easy
-          to manage.
+          your video game collection by category. Whether you organize by genre,
+          platform, or custom tags, this site keeps everything easy to manage.
         </p>
 
         <h2 className="homepage__heading">What can you do?</h2>
@@ -37,14 +36,15 @@ const HomePage = () => {
         </p>
       </section>
 
+      {/* Navigate to games route */}
       <section className="homepage__actions">
         <Link to="/games" className="btn btn--primary">
-            View Games
+          View Games
         </Link>
 
         {/* Navigate to add-game route */}
         <Link to="/add-game" className="btn btn--secondary">
-            Add New Game
+          Add New Game
         </Link>
       </section>
     </main>
