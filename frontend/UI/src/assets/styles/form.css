@@ -1,0 +1,98 @@
+/* Form wrapper */
+.game-form {
+  background-color: #20232a;
+  border: 1px solid #2f333d;
+  border-radius: 6px;
+  padding: 28px;
+  max-width: 500px;
+  margin: 0 auto 40px;
+  color: #dcdcdc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Form title */
+.game-form__title {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #ffffff;
+  border-bottom: 1px solid #2f333d;
+  padding-bottom: 8px;
+}
+
+/* Fields */
+.game-form__field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+.game-form__field label {
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+  color: #b5b5b5;
+}
+
+.game-form__field input,
+.game-form__field textarea {
+  background-color: #181a1f;
+  border: 1px solid #2f333d;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 0.95rem;
+  color: #dcdcdc;
+}
+
+.game-form__field input::placeholder,
+.game-form__field textarea::placeholder {
+  color: #7a7a7a;
+}
+
+.game-form__field input:focus,
+.game-form__field textarea:focus {
+  outline: none;
+  border-color: #3f51b5;
+}
+
+/* Actions */
+.game-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+/* Buttons reuse existing styles */
+.btn {
+  padding: 10px 22px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid #2f333d;
+  background-color: #20232a;
+  color: #dcdcdc;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn:hover {
+  background-color: #2a2e37;
+  border-color: #3a3f4b;
+}
+
+.btn--primary {
+  background-color: #3f51b5;
+  border-color: #3f51b5;
+  color: #ffffff;
+}
+
+.btn--primary:hover {
+  background-color: #4c5fd7;
+}
+
+/* Error message */
+.game-form__error {
+  background-color: #2a1f1f;
+  border: 1px solid #5c2b2b;
+  color: #ffb4b4;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}

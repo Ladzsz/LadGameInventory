@@ -1,5 +1,6 @@
 import '../assets/styles/headerStyles.css';
 import gamelogo from '../assets/images/Gamelogo.png';
+import { Link } from 'react-router-dom';
 
 function Header() {
   return (
@@ -12,8 +13,8 @@ function Header() {
         
 
         <nav id="header-navbar">
-            <a href="/">Home</a> 
-            <a href="/games">Games</a> 
+            <Link to="/">Home</Link>
+            <Link to="/games">Games</Link>
         </nav>
 
         <img src={gamelogo} alt="Logo"/>
