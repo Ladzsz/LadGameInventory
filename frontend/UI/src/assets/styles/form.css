@@ -53,6 +53,16 @@
   border-color: #3f51b5;
 }
 
+option {
+  background-color: #20232a;
+  border-radius: 4px;
+}
+
+select {
+  background-color: #181a1f;
+  padding: 5px;
+}
+
 /* Actions */
 .game-form__actions {
   display: flex;
