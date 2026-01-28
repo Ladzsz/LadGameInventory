@@ -1,23 +1,36 @@
 import React from "react";
 import "../assets/styles/form.css";
+import { useEffect } from "react";
 
 function GameForm({
-  //setting form fields to either edit or new
+  //setting the props
   gameId = null,
   initialData = {},
   onSuccess,
 }) {
+
+  //setting states
   const [name, setName] = React.useState(initialData.name || "");
   const [description, setDescription] = React.useState(
     initialData.description || "",
   );
-  const [categoryId, setCategoryId] = React.useState(
-    initialData.category_id || "",
-  );
+
+  const [categories, setCategories] = React.useState([]);
+  const [category, setCategory] = React.useState(initialData.category_id || "");
+
   const [quantity, setQuantity] = React.useState(initialData.quantity || 1);
 
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
+
+  // Fetch categories from backend
+  useEffect(() => {
+    
+    fetch("http://localhost:5000/api/categories")
+      .then((res) => res.json())
+      .then((data) => setCategories(data))
+      .catch((err) => console.error("Failed to load categories:", err));
+  }, []);
 
   //function to handle form submit
   const handleSubmit = async (e) => {
@@ -29,14 +42,16 @@ function GameForm({
     const payload = {
       name,
       description,
-      category_id: Number(categoryId),
+      category_id: Number(category),
       quantity: Number(quantity),
     };
 
-    //fetch request
+    //fetch request to create or update game
     try {
       const response = await fetch(
-        gameId ? `http://localhost:5000/api/games/${gameId}` : "http://localhost:5000/api/games",
+        gameId
+          ? `http://localhost:5000/api/games/${gameId}`
+          : "http://localhost:5000/api/games",
         {
           method: gameId ? "PUT" : "POST",
           headers: {
@@ -46,17 +61,16 @@ function GameForm({
         },
       );
 
-      console.log(response)
+      console.log(response);
       if (!response.ok) {
         throw new Error("Failed to save game");
       }
-      
+
       if (onSuccess) onSuccess();
 
       if (!gameId) {
         setName("");
         setDescription("");
-        setCategoryId("");
         setQuantity(1);
       }
     } catch (err) {
@@ -94,12 +108,18 @@ function GameForm({
 
       <div className="game-form__field">
         <label>Category ID</label>
-        <input
-          type="number"
-          value={categoryId}
-          onChange={(e) => setCategoryId(e.target.value)}
+        <select
+          value={category}
+          onChange={(e) => setCategory(Number(e.target.value))}
           required
-        />
+        >
+          <option value="">-- Select a Category --</option>
+          {categories.map((cat) => (
+            <option key={cat.id} value={cat.id}>
+              {cat.name}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className="game-form__field">
