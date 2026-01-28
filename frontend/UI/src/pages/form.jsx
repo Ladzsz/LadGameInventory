@@ -19,6 +19,7 @@ function GameForm({
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
 
+  //function to handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -35,7 +36,7 @@ function GameForm({
     //fetch request
     try {
       const response = await fetch(
-        gameId ? `/api/games/${gameId}` : "/api/games",
+        gameId ? `http://localhost:5000/api/games/${gameId}` : "http://localhost:5000/api/games",
         {
           method: gameId ? "PUT" : "POST",
           headers: {
@@ -45,10 +46,11 @@ function GameForm({
         },
       );
 
+      console.log(response)
       if (!response.ok) {
         throw new Error("Failed to save game");
       }
-
+      
       if (onSuccess) onSuccess();
 
       if (!gameId) {

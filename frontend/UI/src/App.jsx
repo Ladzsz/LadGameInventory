@@ -15,7 +15,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route
             path="/add-game"
-            element={<GameForm onSuccess={() => console.log("Game saved!")} />}
+            element={<GameForm onSuccess={() => { alert("Game saved!"); console.log("Game saved!"); }} />}
           />
         </Routes>
       </Content>
