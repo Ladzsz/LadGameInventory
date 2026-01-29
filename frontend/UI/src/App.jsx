@@ -4,6 +4,7 @@ import Footer from "./components/footer";
 import Content from "./components/content";
 import HomePage from "./pages/home";
 import GameForm from "./pages/form";
+import GamePage from "./pages/gamepage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -24,6 +25,20 @@ function App() {
               />
             }
           />
+
+            <Route
+  path="/add-game/:id"
+  element={
+    <GameForm
+      onSuccess={() => {
+        alert("Game saved!");
+        console.log("Game saved!");
+      }}
+    />
+  }
+/>
+          
+          <Route path="/games" element={<GamePage />} />
         </Routes>
       </Content>
       <Footer />
