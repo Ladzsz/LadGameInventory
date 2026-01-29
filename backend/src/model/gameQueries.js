@@ -41,6 +41,10 @@ const deleteGame = async (id) => {
   await pool.query("DELETE FROM games WHERE id = $1", [id]);  
 };
 
+const searchGame = async (name) => {
+  await pool.query("SELECT * FROM games WHERE name ILIKE $1", [`%${name}%`]);
+}; 
+
 module.exports = {
   getGames,
   getGameById,
@@ -48,5 +52,6 @@ module.exports = {
   updateGame,
   deleteGame,
   getGameByCategory,
-  getGameByuserId
+  getGameByuserId,
+  searchGame,
 };

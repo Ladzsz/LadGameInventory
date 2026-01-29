@@ -5,7 +5,8 @@ const {
   updateGame,
   deleteGame,
   getGameByCategory,
-  getGameByuserId
+  getGameByuserId,
+  searchGame
 } = require("../model/gameQueries");
 
 
@@ -27,6 +28,17 @@ const getGameByIdController = async (req, res) => {
       return res.status(404).json({ error: "Game not found" });
     }
     res.status(200).json(game);
+  } catch (err) {
+    console.error('ERROR:', err.message);
+    next(err); 
+  }
+};
+
+const searchGameController = async (req, res) => {
+  try {
+    const { name } = req.query;
+    const games = await searchGame(name);
+    res.status(200).json(games);
   } catch (err) {
     console.error('ERROR:', err.message);
     next(err); 
@@ -104,5 +116,6 @@ module.exports = {
   updateGameController,
   deleteGameController,
   getGamesByCategoryController,
-  getGamesByUserController
+  getGamesByUserController,
+  searchGameController,
 };
