@@ -43,7 +43,8 @@ const deleteGame = async (id) => {
 };
 
 const searchGame = async (name) => {
-  await pool.query("SELECT * FROM games WHERE name ILIKE $1", [`%${name}%`]);
+  const res = await pool.query("SELECT * FROM games WHERE name ILIKE $1", [`%${name}%`]);
+  return res.rows;
 }; 
 
 module.exports = {
