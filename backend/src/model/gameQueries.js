@@ -2,7 +2,8 @@ const pool = require("./pool");
 
 // game queries for CRUD operations
 const getGames = async () => {
-  const res = await pool.query("SELECT * FROM games ORDER BY id ASC");
+  const res = await pool.query(`
+  SELECT games.*, categories.name AS category_name FROM games JOIN categories ON games.category_id = categories.id ORDER BY games.id ASC`);
   return res.rows;
 };
 
