@@ -32,7 +32,8 @@ const GamePage = () => {
 
     try {
       await fetch(`http://localhost:5000/api/games/${id}`, { method: "DELETE" });
-      setGames((prev) => prev.filter((game) => game._id !== id));
+      setGames((prev) => prev.filter((game) => game.id !== id));
+      alert("Game deleted successfully.");
     } catch (err) {
       console.error("Failed to delete game:", err);
     }
