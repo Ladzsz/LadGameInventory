@@ -105,7 +105,6 @@
 
 /* Mobile: 425px and below */
 @media (max-width: 425px) {
-  /* Stack header elements vertically */
   .game-page__header {
     flex-direction: column;
     align-items: stretch;
@@ -117,35 +116,29 @@
     margin-right: 0;
   }
 
-  /* Cards take full width */
   .game-tabs {
     grid-template-columns: 1fr;
     gap: 15px;
   }
 
-  /* Card padding smaller for mobile */
   .game-tab {
     padding: 16px;
   }
 
-  /* Actions stack vertically */
   .game-tab__actions {
     flex-direction: column;
     gap: 8px;
   }
 
-  /* Buttons stretch full width on mobile */
   .game-tab__actions .btn {
     width: 100%;
     text-align: center;
   }
 
-  /* Smaller font for headings */
   .game-tab__info h3 {
     font-size: 1.1rem;
   }
-
-  /* Smaller font for text */
+  
   .game-tab__info p {
     font-size: 0.9rem;
   }

@@ -46,6 +46,11 @@ const HomePage = () => {
         <Link to="/add-game" className="btn btn--secondary">
           Add New Game
         </Link>
+
+        {/* Navigate to add-category route */}
+        <Link to="/add-category" className="btn btn--secondary">
+          Add New Category
+        </Link>
       </section>
     </main>
   );
