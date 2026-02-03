@@ -1,6 +1,6 @@
 const pool = require("./pool");
 const bcrypt = require("bcryptjs");
-
+const jwt = require("jsonwebtoken");
 
 //user queries for CRUD operations
 
@@ -30,21 +30,52 @@ const createUser = async (username, email, password, is_admin = false) => {
 // Update an existing user
 const updateUser = async (id, username, email, password, is_admin) => {
   // If password is provided, hash it
-  let hashedPassword;
-  if (password) {
-    hashedPassword = await bcrypt.hash(password, 10);
-  }
+  let hashedPassword = password ? await bcrypt.hash(password, 10) : undefined;
 
   // Update user in database
   const res = await pool.query(
     `UPDATE users 
-     SET username = $1, email = $2, password = COALESCE($3, password), is_admin = $4 
+     SET username = $1, email = $2, password = COALESCE($3, password), is_admin = COALESCE($4, is_admin)
      WHERE id = $5 
      RETURNING *`,
     [username, email, hashedPassword, is_admin, id]
   );
 
   return res.rows[0];
+};
+
+const loginUser = async (email, password) => {
+  // Find user by email
+  const res = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+  const user = res.rows[0];
+
+  if (!user) {
+    throw new Error("Invalid email or password");
+  }
+
+  // Compare hashed password
+  const validPassword = await bcrypt.compare(password, user.password);
+  if (!validPassword) {
+    throw new Error("Invalid email or password");
+  }
+
+  // Generate JWT token
+  const token = jwt.sign(
+    { id: user.id, is_admin: user.is_admin },
+    process.env.JWT_SECRET,
+    { expiresIn: process.env.JWT_EXPIRATION }
+  );
+
+  // Return user info + token
+  return {
+    user: {
+      id: user.id,
+      username: user.username,
+      email: user.email,
+      is_admin: user.is_admin,
+    },
+    token,
+  };
 };
 
 const deleteUser = async (id) => {
@@ -57,4 +88,5 @@ module.exports = {
   createUser,
   updateUser,
   deleteUser,
+  loginUser,
 };

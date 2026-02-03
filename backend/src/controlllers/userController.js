@@ -4,6 +4,7 @@ const {
   createUser,
   updateUser,
   deleteUser,
+  loginUser
 } = require("../model/userqueries");
 
 //contoller funcctions for user
@@ -34,7 +35,12 @@ const getUserByIdController = async (req, res) => {
 const createUserController = async (req, res) => {
   try {
     const { username, email, password } = req.body;
-    const newUser = await createUser(username, email, password);
+    const newUser = await createUser(username, email, password, false);
+
+     if (!username || !email || !password) {
+      return res.status(400).json({ error: "All fields are required" });
+    }
+
     res.status(201).json(newUser);
   } catch (err) {
     console.error('ERROR:', err.message);
@@ -44,12 +50,20 @@ const createUserController = async (req, res) => {
 
 const updateUserController = async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { username, email, password, is_admin } = req.body;
+
+      // Only allow admin users to update is_admin
+    let adminValue = undefined;
+    if (req.user && req.user.is_admin) {
+      adminValue = is_admin; // admin can update this
+    }
+
     const updatedUser = await updateUser(
       req.params.id,
       username,
       email,
-      password
+      password,
+      adminValue
     );
     if (!updatedUser) {
       return res.status(404).json({ error: "User not found" });
@@ -58,6 +72,22 @@ const updateUserController = async (req, res) => {
   } catch (err) {
     console.error('ERROR:', err.message);
     next(err); 
+  }
+};
+
+const loginUserController = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+      if (!email || !password) {
+  return res.status(400).json({ message: "Email and password are required" });
+}
+    const result = await loginUser(email, password);
+  
+    res.status(200).json(result);
+  } catch (err) {
+    console.error('ERROR:', err.message);
+    res.status(401).json({ message: err.message });
   }
 };
 
@@ -77,4 +107,5 @@ module.exports = {
   createUserController,
   updateUserController,
   deleteUserController,
+  loginUserController,
 };
