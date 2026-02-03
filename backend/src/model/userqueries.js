@@ -1,4 +1,6 @@
 const pool = require("./pool");
+const bcrypt = require("bcryptjs");
+
 
 //user queries for CRUD operations
 
@@ -12,19 +14,36 @@ const getUserById = async (id) => {
   return res.rows[0];
 };
 
-const createUser = async (username, email, password) => {
+const createUser = async (username, email, password, is_admin = false) => {
+  // Hash the password
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  // Insert user into database
   const res = await pool.query(
-    "INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *",
-    [username, email, password]
+    "INSERT INTO users (username, email, password, is_admin) VALUES ($1, $2, $3, $4) RETURNING *",
+    [username, email, hashedPassword, is_admin]
   );
+
   return res.rows[0];
 };
 
-const updateUser = async (id, username, email, password) => {
+// Update an existing user
+const updateUser = async (id, username, email, password, is_admin) => {
+  // If password is provided, hash it
+  let hashedPassword;
+  if (password) {
+    hashedPassword = await bcrypt.hash(password, 10);
+  }
+
+  // Update user in database
   const res = await pool.query(
-    "UPDATE users SET username = $1, email = $2, password = $3 WHERE id = $4 RETURNING *",
-    [username, email, password, id]
+    `UPDATE users 
+     SET username = $1, email = $2, password = COALESCE($3, password), is_admin = $4 
+     WHERE id = $5 
+     RETURNING *`,
+    [username, email, hashedPassword, is_admin, id]
   );
+
   return res.rows[0];
 };
 
