@@ -16,6 +16,22 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+--
+-- Name: update_updated_at_column(); Type: FUNCTION; Schema: public; Owner: ladzsz
+--
+
+CREATE FUNCTION public.update_updated_at_column() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    NEW.updated_at = CURRENT_TIMESTAMP;
+    RETURN NEW;
+END;
+$$;
+
+
+ALTER FUNCTION public.update_updated_at_column() OWNER TO ladzsz;
+
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
@@ -27,7 +43,9 @@ SET default_table_access_method = heap;
 CREATE TABLE public.categories (
     id integer NOT NULL,
     name character varying(50) NOT NULL,
-    description text
+    description text,
+    updated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP
 );
 
 
@@ -104,7 +122,9 @@ CREATE TABLE public.users (
     username character varying(50) NOT NULL,
     email character varying(100) NOT NULL,
     password character varying(255) NOT NULL,
-    created_at timestamp without time zone DEFAULT now()
+    created_at timestamp without time zone DEFAULT now(),
+    is_admin boolean DEFAULT false NOT NULL,
+    updated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP
 );
 
 
@@ -191,6 +211,13 @@ ALTER TABLE ONLY public.users
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_username_key UNIQUE (username);
+
+
+--
+-- Name: categories update_categories_updated_at; Type: TRIGGER; Schema: public; Owner: ladzsz
+--
+
+CREATE TRIGGER update_categories_updated_at BEFORE UPDATE ON public.categories FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
 
 
 --
