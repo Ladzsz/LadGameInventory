@@ -29,38 +29,36 @@ function GameForm({ onSuccess }) {
 
   // use effect to fetch game data after mount
   useEffect(() => {
-  const fetchGame = async () => {
-    try {
-      setLoading(true);
+    const fetchGame = async () => {
+      try {
+        setLoading(true);
 
-      const url = gameId
-        ? `http://localhost:5000/api/games/${gameId}`
-        : `http://localhost:5000/api/games`;
+        const url = gameId
+          ? `http://localhost:5000/api/games/${gameId}`
+          : `http://localhost:5000/api/games`;
 
-      const res = await fetch(url);
-      if (!res.ok) throw new Error("Failed to fetch game(s)");
+        const res = await fetch(url);
+        if (!res.ok) throw new Error("Failed to fetch game(s)");
 
-      const data = await res.json();
+        const data = await res.json();
 
-      if (gameId) {
-        // populate form incase of edit
-        setName(data.name || "");
-        setDescription(data.description || "");
-        setCategory(data.category_id || "");
-        setQuantity(data.quantity || 1);
+        if (gameId) {
+          // populate form incase of edit
+          setName(data.name || "");
+          setDescription(data.description || "");
+          setCategory(data.category_id || "");
+          setQuantity(data.quantity || 1);
+        }
+      } catch (err) {
+        console.error(err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
       }
+    };
 
-    } catch (err) {
-      console.error(err);
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  fetchGame();
-}, [gameId]);
-
+    fetchGame();
+  }, [gameId]);
 
   // handle submit
   const handleSubmit = async (e) => {
@@ -86,15 +84,16 @@ function GameForm({ onSuccess }) {
 
       const response = await fetch(url, {
         method,
-        headers: { "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(payload),
       });
 
       if (!response.ok) throw new Error("Failed to save game");
 
-      if (onSuccess) onSuccess(); 
+      if (onSuccess) onSuccess();
 
       // reset form only if adding
       if (!gameId) {

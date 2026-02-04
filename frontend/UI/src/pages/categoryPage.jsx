@@ -7,7 +7,7 @@ const CategoryPage = () => {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
 
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
 
   // Fetch all categories
   const fetchCategories = async () => {
@@ -16,7 +16,7 @@ const CategoryPage = () => {
       const res = await fetch("http://localhost:5000/api/categories", {
         method: "GET",
         headers: {
-          "Authorization": `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       const data = await res.json();
@@ -40,13 +40,14 @@ const CategoryPage = () => {
       return;
     }
 
-    if (!window.confirm("Are you sure you want to delete this category?")) return;
+    if (!window.confirm("Are you sure you want to delete this category?"))
+      return;
 
     try {
       await fetch(`http://localhost:5000/api/categories/${id}`, {
         method: "DELETE",
         headers: {
-          "Authorization": `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       setCategories((prev) => prev.filter((category) => category.id !== id));
@@ -69,7 +70,7 @@ const CategoryPage = () => {
     setLoading(true);
     try {
       const res = await fetch(
-        `http://localhost:5000/api/categories/search?name=${encodeURIComponent(value)}`
+        `http://localhost:5000/api/categories/search?name=${encodeURIComponent(value)}`,
       );
       const data = await res.json();
       setCategories(data);
@@ -108,7 +109,9 @@ const CategoryPage = () => {
             <div key={category.id} className="game-tab">
               <div className="game-tab__info">
                 <h3>{category.name}</h3>
-                <p><strong>Description:</strong> {category.description}</p>
+                <p>
+                  <strong>Description:</strong> {category.description}
+                </p>
               </div>
 
               <div className="game-tab__actions">

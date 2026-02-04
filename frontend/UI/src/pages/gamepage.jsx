@@ -7,13 +7,15 @@ const GamePage = () => {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
 
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
 
   // Fetch all games
   const fetchGames = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/games", { method: "GET" });
+      const res = await fetch("http://localhost:5000/api/games", {
+        method: "GET",
+      });
       const data = await res.json();
       setGames(data);
     } catch (err) {
@@ -41,7 +43,7 @@ const GamePage = () => {
       await fetch(`http://localhost:5000/api/games/${id}`, {
         method: "DELETE",
         headers: {
-          "Authorization": `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       setGames((prev) => prev.filter((game) => game.id !== id));
@@ -64,7 +66,7 @@ const GamePage = () => {
     setLoading(true);
     try {
       const res = await fetch(
-        `http://localhost:5000/api/games/search?name=${encodeURIComponent(value)}`
+        `http://localhost:5000/api/games/search?name=${encodeURIComponent(value)}`,
       );
       const data = await res.json();
       setGames(data);
@@ -103,17 +105,22 @@ const GamePage = () => {
             <div key={game.id} className="game-tab">
               <div className="game-tab__info">
                 <h3>{game.title}</h3>
-                <p><strong>Genre:</strong> {game.name}</p>
-                <p><strong>Category:</strong> {game.category_name}</p>
-                <p><strong>Description:</strong> {game.description}</p>
-                <p><strong>Quantity:</strong> {game.quantity}</p>
+                <p>
+                  <strong>Genre:</strong> {game.name}
+                </p>
+                <p>
+                  <strong>Category:</strong> {game.category_name}
+                </p>
+                <p>
+                  <strong>Description:</strong> {game.description}
+                </p>
+                <p>
+                  <strong>Quantity:</strong> {game.quantity}
+                </p>
               </div>
 
               <div className="game-tab__actions">
-                <Link
-                  to={`/add-game/${game.id}`}
-                  className="btn btn--primary"
-                >
+                <Link to={`/add-game/${game.id}`} className="btn btn--primary">
                   Edit
                 </Link>
 

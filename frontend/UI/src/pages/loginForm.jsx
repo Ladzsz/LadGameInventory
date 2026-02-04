@@ -1,50 +1,53 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function AuthForm()  {
+function AuthForm() {
   //setting states
-  const [mode, setMode] = useState('login'); // 'login' or 'register'
-  const [username, setuserName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [role, setRole] = useState('user');
-  const [error, setError] = useState('');
+  const [mode, setMode] = useState("login"); // 'login' or 'register'
+  const [username, setuserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState("user");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   //function to handle submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     //setting up endpoint and body based on mode
-    const endpoint = mode === 'login' ? 'http://localhost:5000/api/users/login' : 'http://localhost:5000/api/users';
-    const body = mode === 'login'
-      ? { email, password }
-      : { username, email, password, role };
+    const endpoint =
+      mode === "login"
+        ? "http://localhost:5000/api/users/login"
+        : "http://localhost:5000/api/users";
+    const body =
+      mode === "login"
+        ? { email, password }
+        : { username, email, password, role };
 
-      //try block to make API call
+    //try block to make API call
     try {
       const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
 
       //handling response
       if (!response.ok) {
         const errData = await response.json();
-        throw new Error(errData.message || 'Something went wrong');
+        throw new Error(errData.message || "Something went wrong");
       }
 
       //success block
       const data = await response.json();
-      if (mode === 'login') {
-        localStorage.setItem('token', data.token);
-        window.dispatchEvent(new Event('loginStateChange'));
-              navigate('/');      
+      if (mode === "login") {
+        localStorage.setItem("token", data.token);
+        window.dispatchEvent(new Event("loginStateChange"));
+        navigate("/");
       } else {
-              alert('Registration successful! Please log in.');
-              setMode('login');
+        alert("Registration successful! Please log in.");
+        setMode("login");
       }
-      
     } catch (err) {
       setError(err.message);
     }
@@ -53,67 +56,73 @@ function AuthForm()  {
   //rendering form
   return (
     <form className="game-form" onSubmit={handleSubmit}>
-  <h2 className="game-form__title">{mode === 'login' ? 'Login' : 'Register'}</h2>
+      <h2 className="game-form__title">
+        {mode === "login" ? "Login" : "Register"}
+      </h2>
 
-  {error && <p className="game-form__error">{error}</p>}
+      {error && <p className="game-form__error">{error}</p>}
 
-  {mode === 'register' && (
-    <div className="game-form__field">
-      <label>Name</label>
-      <input
-        type="text"
-        value={username}
-        onChange={(e) => setuserName(e.target.value)}
-        required
-      />
-    </div>
-  )}
+      {mode === "register" && (
+        <div className="game-form__field">
+          <label>Name</label>
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setuserName(e.target.value)}
+            required
+          />
+        </div>
+      )}
 
-  <div className="game-form__field">
-    <label>Email</label>
-    <input
-      type="email"
-      value={email}
-      onChange={(e) => setEmail(e.target.value)}
-      required
-    />
-  </div>
+      <div className="game-form__field">
+        <label>Email</label>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+      </div>
 
-  <div className="game-form__field">
-    <label>Password</label>
-    <input
-      type="password"
-      value={password}
-      onChange={(e) => setPassword(e.target.value)}
-      required
-    />
-  </div>
+      <div className="game-form__field">
+        <label>Password</label>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+      </div>
 
-  {mode === 'register' && (
-    <div className="game-form__field">
-      <label>Role</label>
-      <select value={role} onChange={(e) => setRole(e.target.value)}>
-        <option value="user">User</option>
-        <option value="admin">Admin</option>
-      </select>
-    </div>
-  )}
+      {mode === "register" && (
+        <div className="game-form__field">
+          <label>Role</label>
+          <select value={role} onChange={(e) => setRole(e.target.value)}>
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+      )}
 
-  <div className="game-form__actions">
-    <button className="btn btn--primary" type="submit">
-      {mode === 'login' ? 'Login' : 'Register'}
-    </button>
-  </div>
+      <div className="game-form__actions">
+        <button className="btn btn--primary" type="submit">
+          {mode === "login" ? "Login" : "Register"}
+        </button>
+      </div>
 
-  <p
-    className="game-form__toggled"
-    style={{ cursor: 'pointer', color: 'blue', display: 'inline-block', marginTop: '10px' }}
-    onClick={() => setMode(mode === 'login' ? 'register' : 'login')}
-  >
-    {mode === 'login' ? 'Create an account?' : 'Already have an account?'}
-  </p>
-</form>
-
+      <p
+        className="game-form__toggled"
+        style={{
+          cursor: "pointer",
+          color: "blue",
+          display: "inline-block",
+          marginTop: "10px",
+        }}
+        onClick={() => setMode(mode === "login" ? "register" : "login")}
+      >
+        {mode === "login" ? "Create an account?" : "Already have an account?"}
+      </p>
+    </form>
   );
 }
 

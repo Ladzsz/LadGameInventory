@@ -8,7 +8,7 @@ function CategoryForm({ onSuccess }) {
   const { id: categoryId } = useParams();
   const navigate = useNavigate();
 
-  // setting states 
+  // setting states
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [categories, setCategories] = useState([]);
@@ -27,36 +27,34 @@ function CategoryForm({ onSuccess }) {
 
   // use effect to fetch game data after mount
   useEffect(() => {
-  const fetchGame = async () => {
-    try {
-      setLoading(true);
+    const fetchGame = async () => {
+      try {
+        setLoading(true);
 
-      const url = categoryId
-        ? `http://localhost:5000/api/categories/${categoryId}`
-        : `http://localhost:5000/api/categories`;
+        const url = categoryId
+          ? `http://localhost:5000/api/categories/${categoryId}`
+          : `http://localhost:5000/api/categories`;
 
-      const res = await fetch(url);
-      if (!res.ok) throw new Error("Failed to fetch category(s)");
+        const res = await fetch(url);
+        if (!res.ok) throw new Error("Failed to fetch category(s)");
 
-      const data = await res.json();
+        const data = await res.json();
 
-      if (categoryId) {
-        // populate form incase of edit
-        setName(data.name || "");
-        setDescription(data.description || "");
+        if (categoryId) {
+          // populate form incase of edit
+          setName(data.name || "");
+          setDescription(data.description || "");
+        }
+      } catch (err) {
+        console.error(err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
       }
+    };
 
-    } catch (err) {
-      console.error(err);
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  fetchGame();
-}, [categoryId]);
-
+    fetchGame();
+  }, [categoryId]);
 
   // handle submit
   const handleSubmit = async (e) => {
@@ -80,15 +78,16 @@ function CategoryForm({ onSuccess }) {
 
       const response = await fetch(url, {
         method,
-        headers: { "Content-Type": "application/json", 
-          "Authorization": `Bearer ${token}`
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(payload),
       });
 
       if (!response.ok) throw new Error("Failed to save category");
 
-      if (onSuccess) onSuccess(); 
+      if (onSuccess) onSuccess();
 
       // reset form only if adding
       if (!categoryId) {
@@ -108,7 +107,9 @@ function CategoryForm({ onSuccess }) {
   // render form
   return (
     <form className="game-form" onSubmit={handleSubmit}>
-      <h2 className="game-form__title">{categoryId ? "Edit Category" : "Add Category"}</h2>
+      <h2 className="game-form__title">
+        {categoryId ? "Edit Category" : "Add Category"}
+      </h2>
 
       {error && <p className="game-form__error">{error}</p>}
 

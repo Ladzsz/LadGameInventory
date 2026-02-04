@@ -5,21 +5,19 @@ import SignOutButton from "./signoutBtn";
 import { useState, useEffect } from "react";
 
 function Header() {
-
-   const [token, setToken] = useState(localStorage.getItem('token'));
+  const [token, setToken] = useState(localStorage.getItem("token"));
 
   // Re-check token when component mounts or when storage changes
   useEffect(() => {
     const checkToken = () => {
-      setToken(localStorage.getItem('token'));
+      setToken(localStorage.getItem("token"));
     };
 
     // Listen for storage changes
-    window.addEventListener('loginStateChange', checkToken);
-    
-    return () => window.removeEventListener('loginStateChange', checkToken);
-  }, []);
+    window.addEventListener("loginStateChange", checkToken);
 
+    return () => window.removeEventListener("loginStateChange", checkToken);
+  }, []);
 
   return (
     <header>
@@ -32,11 +30,12 @@ function Header() {
       <nav id="header-navbar">
         <Link to="/">Home</Link>
         <Link to="/games">Games</Link>
-         {token ? <SignOutButton onSignOut={() => setToken(null)} /> : <Link to="/login">Login</Link>}
+        {token ? (
+          <SignOutButton onSignOut={() => setToken(null)} />
+        ) : (
+          <Link to="/login">Login</Link>
+        )}
       </nav>
-
-
-      
 
       <img src={gamelogo} alt="Logo" />
     </header>

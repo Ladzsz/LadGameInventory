@@ -4,7 +4,7 @@
   margin: 0 auto;
   padding: 20px;
   color: #dcdcdc;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
 }
 
 /* Header with search and add button */
@@ -48,13 +48,15 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .game-tab:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* Game info inside card */
@@ -138,7 +140,7 @@
   .game-tab__info h3 {
     font-size: 1.1rem;
   }
-  
+
   .game-tab__info p {
     font-size: 0.9rem;
   }

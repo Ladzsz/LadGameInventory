@@ -52,7 +52,6 @@ const HomePage = () => {
         {/*<Link to="/add-category" className="btn btn--secondary">
           Add New Category
         </Link> */}
-        
       </section>
     </main>
   );
