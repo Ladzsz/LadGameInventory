@@ -21,7 +21,7 @@ const createUser = async (username, email, password, is_admin = false) => {
   // Insert user into database
   const res = await pool.query(
     "INSERT INTO users (username, email, password, is_admin) VALUES ($1, $2, $3, $4) RETURNING *",
-    [username, email, hashedPassword, is_admin]
+    [username, email, hashedPassword, is_admin],
   );
 
   return res.rows[0];
@@ -38,7 +38,7 @@ const updateUser = async (id, username, email, password, is_admin) => {
      SET username = $1, email = $2, password = COALESCE($3, password), is_admin = COALESCE($4, is_admin)
      WHERE id = $5 
      RETURNING *`,
-    [username, email, hashedPassword, is_admin, id]
+    [username, email, hashedPassword, is_admin, id],
   );
 
   return res.rows[0];
@@ -63,7 +63,7 @@ const loginUser = async (email, password) => {
   const token = jwt.sign(
     { id: user.id, is_admin: user.is_admin },
     process.env.JWT_SECRET,
-    { expiresIn: process.env.JWT_EXPIRATION }
+    { expiresIn: process.env.JWT_EXPIRATION },
   );
 
   // Return user info + token

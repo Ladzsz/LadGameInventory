@@ -14,7 +14,7 @@ const getCategoryById = async (id) => {
 const createCategory = async (name, description) => {
   const res = await pool.query(
     "INSERT INTO categories (name, description) VALUES ($1, $2) RETURNING *",
-    [name, description]
+    [name, description],
   );
   return res.rows[0];
 };
@@ -22,7 +22,7 @@ const createCategory = async (name, description) => {
 const updateCategory = async (id, name, description) => {
   const res = await pool.query(
     "UPDATE categories SET name = $1, description = $2 WHERE id = $3 RETURNING *",
-    [name, description, id]
+    [name, description, id],
   );
   return res.rows[0];
 };
@@ -32,10 +32,11 @@ const deleteCategory = async (id) => {
 };
 
 const searchCategories = async (name) => {
-  const res = await pool.query("SELECT * FROM categories WHERE name ILIKE $1", [`%${name}%`]);
+  const res = await pool.query("SELECT * FROM categories WHERE name ILIKE $1", [
+    `%${name}%`,
+  ]);
   return res.rows;
-}; 
-
+};
 
 module.exports = {
   getCategories,

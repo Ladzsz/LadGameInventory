@@ -1,11 +1,11 @@
-const  {
+const {
   getCategories,
   getCategoryById,
   createCategory,
   updateCategory,
   deleteCategory,
   searchCategories,
-} = require('../model/categoryQueries');
+} = require("../model/categoryQueries");
 
 // Controller functions for category routes
 const getAllCategories = async (req, res) => {
@@ -13,8 +13,8 @@ const getAllCategories = async (req, res) => {
     const categories = await getCategories();
     res.status(200).json(categories);
   } catch (err) {
-    console.error('ERROR:', err.message);
-    next(err); 
+    console.error("ERROR:", err.message);
+    next(err);
   }
 };
 
@@ -22,12 +22,12 @@ const getCategoryByIdController = async (req, res) => {
   try {
     const category = await getCategoryById(req.params.id);
     if (!category) {
-      return res.status(404).json({ error: 'Category not found' });
+      return res.status(404).json({ error: "Category not found" });
     }
     res.status(200).json(category);
   } catch (err) {
-    console.error('ERROR:', err.message);
-    next(err); 
+    console.error("ERROR:", err.message);
+    next(err);
   }
 };
 
@@ -37,22 +37,26 @@ const createCategoryController = async (req, res) => {
     const newCategory = await createCategory(name, description);
     res.status(201).json(newCategory);
   } catch (err) {
-    console.error('ERROR:', err.message);
-    next(err); 
+    console.error("ERROR:", err.message);
+    next(err);
   }
 };
 
 const updateCategoryController = async (req, res) => {
   try {
     const { name, description } = req.body;
-    const updatedCategory = await updateCategory(req.params.id, name, description);
+    const updatedCategory = await updateCategory(
+      req.params.id,
+      name,
+      description,
+    );
     if (!updatedCategory) {
-      return res.status(404).json({ error: 'Category not found' });
+      return res.status(404).json({ error: "Category not found" });
     }
     res.status(200).json(updatedCategory);
   } catch (err) {
-    console.error('ERROR:', err.message);
-    next(err); 
+    console.error("ERROR:", err.message);
+    next(err);
   }
 };
 
@@ -62,8 +66,8 @@ const searchCategoriesController = async (req, res) => {
     const categories = await searchCategories(name);
     res.status(200).json(categories);
   } catch (err) {
-    console.error('ERROR:', err.message);
-    next(err); 
+    console.error("ERROR:", err.message);
+    next(err);
   }
 };
 
@@ -72,8 +76,8 @@ const deleteCategoryController = async (req, res) => {
     await deleteCategory(req.params.id);
     res.status(204).send();
   } catch (err) {
-    console.error('ERROR:', err.message);
-    next(err); 
+    console.error("ERROR:", err.message);
+    next(err);
   }
 };
 

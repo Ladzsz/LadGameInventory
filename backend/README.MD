@@ -1,5 +1,3 @@
-
-
 # Backend - GameInventory
 
 This is the **Express backend** for the GameInventory app.  
@@ -17,9 +15,11 @@ backend/
 ├── model/ # Database queries and models
 ├── .env # Environment variables
 └── package.json # Backend dependencies
+
 ---
 
 ## ⚡ Tech Stack
+
 - Node.js
 - Express.js
 - PostgreSQL
@@ -28,5 +28,3 @@ backend/
 - CORS and Morgan for middleware/logging
 
 ---
-
-
