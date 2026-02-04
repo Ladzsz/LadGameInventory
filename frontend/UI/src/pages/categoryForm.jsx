@@ -15,6 +15,8 @@ function CategoryForm({ onSuccess }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const token = localStorage.getItem("token");
+
   // fetch categories
   useEffect(() => {
     fetch("http://localhost:5000/api/categories")
@@ -78,11 +80,13 @@ function CategoryForm({ onSuccess }) {
 
       const response = await fetch(url, {
         method,
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", 
+          "Authorization": `Bearer ${token}`
+        },
         body: JSON.stringify(payload),
       });
 
-      if (!response.ok) throw new Error("Failed to save game");
+      if (!response.ok) throw new Error("Failed to save category");
 
       if (onSuccess) onSuccess(); 
 

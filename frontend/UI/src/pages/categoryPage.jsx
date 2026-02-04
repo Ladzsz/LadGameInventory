@@ -7,11 +7,18 @@ const CategoryPage = () => {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
 
+  const token = localStorage.getItem('token');
+
   // Fetch all categories
   const fetchCategories = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/categories", { method: "GET" });
+      const res = await fetch("http://localhost:5000/api/categories", {
+        method: "GET",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+      });
       const data = await res.json();
       setCategories(data);
     } catch (err) {
@@ -28,10 +35,20 @@ const CategoryPage = () => {
 
   // Delete category
   const handleDelete = async (id) => {
+    if (!token) {
+      alert("You must be logged in to delete a category.");
+      return;
+    }
+
     if (!window.confirm("Are you sure you want to delete this category?")) return;
 
     try {
-      await fetch(`http://localhost:5000/api/categories/${id}`, { method: "DELETE" });
+      await fetch(`http://localhost:5000/api/categories/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+      });
       setCategories((prev) => prev.filter((category) => category.id !== id));
       alert("Category deleted successfully.");
     } catch (err) {
@@ -39,8 +56,8 @@ const CategoryPage = () => {
     }
   };
 
-  // Search games from backend
-  const searchGames = async (value) => {
+  // Search categories from backend
+  const searchCategories = async (value) => {
     setSearch(value);
 
     // If search is empty, reload all categories
@@ -69,9 +86,9 @@ const CategoryPage = () => {
       <div className="game-page__header">
         <input
           type="text"
-          placeholder="Search games..."
+          placeholder="Search categories..."
           value={search}
-          onChange={(e) => searchGames(e.target.value)}
+          onChange={(e) => searchCategories(e.target.value)}
           className="game-search"
         />
 
