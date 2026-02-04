@@ -16,6 +16,8 @@ function GameForm({ onSuccess }) {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  // get token from local storage
+  const token = localStorage.getItem("token");
 
   // fetch categories
   useEffect(() => {
@@ -84,7 +86,9 @@ function GameForm({ onSuccess }) {
 
       const response = await fetch(url, {
         method,
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
         body: JSON.stringify(payload),
       });
 

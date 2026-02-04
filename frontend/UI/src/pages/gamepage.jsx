@@ -7,6 +7,8 @@ const GamePage = () => {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
 
+  const token = localStorage.getItem('token');
+
   // Fetch all games
   const fetchGames = async () => {
     setLoading(true);
@@ -28,10 +30,20 @@ const GamePage = () => {
 
   // Delete game
   const handleDelete = async (id) => {
+    if (!token) {
+      alert("You must be logged in to delete a game.");
+      return;
+    }
+
     if (!window.confirm("Are you sure you want to delete this game?")) return;
 
     try {
-      await fetch(`http://localhost:5000/api/games/${id}`, { method: "DELETE" });
+      await fetch(`http://localhost:5000/api/games/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+      });
       setGames((prev) => prev.filter((game) => game.id !== id));
       alert("Game deleted successfully.");
     } catch (err) {
