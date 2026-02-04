@@ -31,10 +31,17 @@ const deleteCategory = async (id) => {
   await pool.query("DELETE FROM categories WHERE id = $1", [id]);
 };
 
+const searchCategories = async (name) => {
+  const res = await pool.query("SELECT * FROM categories WHERE name ILIKE $1", [`%${name}%`]);
+  return res.rows;
+}; 
+
+
 module.exports = {
   getCategories,
   getCategoryById,
   createCategory,
   updateCategory,
   deleteCategory,
+  searchCategories,
 };

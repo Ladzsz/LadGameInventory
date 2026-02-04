@@ -3,7 +3,8 @@ const  {
   getCategoryById,
   createCategory,
   updateCategory,
-  deleteCategory
+  deleteCategory,
+  searchCategories,
 } = require('../model/categoryQueries');
 
 // Controller functions for category routes
@@ -55,6 +56,17 @@ const updateCategoryController = async (req, res) => {
   }
 };
 
+const searchCategoriesController = async (req, res) => {
+  try {
+    const { name } = req.query;
+    const categories = await searchCategories(name);
+    res.status(200).json(categories);
+  } catch (err) {
+    console.error('ERROR:', err.message);
+    next(err); 
+  }
+};
+
 const deleteCategoryController = async (req, res) => {
   try {
     await deleteCategory(req.params.id);
@@ -70,5 +82,6 @@ module.exports = {
   getCategoryByIdController,
   createCategoryController,
   updateCategoryController,
-  deleteCategoryController
+  deleteCategoryController,
+  searchCategoriesController,
 };
