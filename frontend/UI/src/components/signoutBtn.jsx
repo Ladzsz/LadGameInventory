@@ -1,15 +1,15 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const SignOutButton = () => {
   const handleSignOut = () => {
     localStorage.removeItem('token');
     window.dispatchEvent(new Event('loginStateChange')); 
-    Navigate('/');
     console.log('User signed out');
   };
 
-  return <button onClick={handleSignOut}>Sign Out</button>;
+  return <Link to="/" onClick={handleSignOut}>Sign Out</Link>;
+  
 };
 
 export default SignOutButton;
