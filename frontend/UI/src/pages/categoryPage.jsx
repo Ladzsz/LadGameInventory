@@ -8,6 +8,7 @@ const CategoryPage = () => {
   const [loading, setLoading] = useState(true);
 
   const token = localStorage.getItem("token");
+  const user = token ? JSON.parse(atob(token.split('.')[1])) : null;
 
   // Fetch all categories
   const fetchCategories = async () => {
@@ -37,6 +38,11 @@ const CategoryPage = () => {
   const handleDelete = async (id) => {
     if (!token) {
       alert("You must be logged in to delete a category.");
+      return;
+    }
+
+    if (!user?.is_admin) {
+      alert("You must be an admin to delete a category.");
       return;
     }
 

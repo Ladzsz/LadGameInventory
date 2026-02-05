@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 
 function Header() {
   const [token, setToken] = useState(localStorage.getItem("token"));
+  const user = JSON.parse(atob(token.split('.')[1]));
 
   // Re-check token when component mounts or when storage changes
   useEffect(() => {
@@ -30,6 +31,7 @@ function Header() {
       <nav id="header-navbar">
         <Link to="/">Home</Link>
         <Link to="/games">Games</Link>
+        {user?.is_admin && <Link to="/categories">Categories</Link>}
         {token ? (
           <SignOutButton onSignOut={() => setToken(null)} />
         ) : (

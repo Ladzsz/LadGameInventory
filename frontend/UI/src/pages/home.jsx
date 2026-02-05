@@ -3,6 +3,10 @@ import "../assets/styles/home.css";
 import { Link } from "react-router-dom";
 
 const HomePage = () => {
+
+  const token = localStorage.getItem('token');
+  const user = token ? JSON.parse(atob(token.split('.')[1])) : null;
+
   return (
     <main className="homepage">
       <section className="homepage__hero">
@@ -49,9 +53,11 @@ const HomePage = () => {
 
         {/* Navigate to add-category route */}
 
-        {/*<Link to="/add-category" className="btn btn--secondary">
-          Add New Category
-        </Link> */}
+        {user?.is_admin ? (
+          <Link to="/add-category" className="btn btn--secondary">
+            Add New Category
+          </Link>
+        ) : null}
       </section>
     </main>
   );

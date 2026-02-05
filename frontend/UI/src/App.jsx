@@ -40,10 +40,11 @@ function App() {
             }
           />
 
+          {/* admin Protected routes */}
           <Route
             path="/add-category"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute requireAdmin>
                 <CategoryForm onSuccess={() => alert("Category saved!")} />
               </ProtectedRoute>
             }
@@ -52,7 +53,7 @@ function App() {
           <Route
             path="/add-category/:id"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute requireAdmin>
                 <CategoryForm onSuccess={() => alert("Category updated!")} />
               </ProtectedRoute>
             }

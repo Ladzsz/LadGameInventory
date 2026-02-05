@@ -7,7 +7,6 @@ function AuthForm() {
   const [username, setuserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("user");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -22,7 +21,7 @@ function AuthForm() {
     const body =
       mode === "login"
         ? { email, password }
-        : { username, email, password, role };
+        : { username, email, password};
 
     //try block to make API call
     try {
@@ -93,16 +92,6 @@ function AuthForm() {
           required
         />
       </div>
-
-      {mode === "register" && (
-        <div className="game-form__field">
-          <label>Role</label>
-          <select value={role} onChange={(e) => setRole(e.target.value)}>
-            <option value="user">User</option>
-            <option value="admin">Admin</option>
-          </select>
-        </div>
-      )}
 
       <div className="game-form__actions">
         <button className="btn btn--primary" type="submit">
