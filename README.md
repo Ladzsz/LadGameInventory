@@ -1,7 +1,7 @@
 # GameInventory
 
 A small game inventory management app built with **Node.js**, **Express**, **React**, and **PostgreSQL**.  
-Users can **CRUD games by category/genre** (Action, Platformer, Shooter, Horror, RPG).
+Users can **CRUD games by category/genre** (Action, Platformer, Shooter, Horror, RPG) and more.
 
 ---
 
