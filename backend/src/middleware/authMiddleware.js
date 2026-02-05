@@ -1,5 +1,7 @@
 const jwt = require("jsonwebtoken");
+const pool = require("../model/pool");
 
+//checking if user logged in
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1]; // Bearer TOKEN
@@ -16,6 +18,25 @@ const authenticateToken = (req, res, next) => {
   } catch (err) {
     return res.status(403).json({ message: "Invalid or expired token." });
   }
+  
 };
 
-module.exports = { authenticateToken };
+//checking if user is admin
+const requireAdmin = async (req, res, next) => {
+  try {
+    const result = await pool.query(
+      "SELECT is_admin FROM users WHERE id = $1",
+      [req.user.id]
+    );
+
+    if (!result.rows[0] || !result.rows[0].is_admin) {
+      return res.status(403).json({ message: "Access denied. Admin privileges required." });
+    }
+
+    next();
+  } catch (err) {
+    return res.status(500).json({ message: "Server error checking admin status." });
+  }
+};
+
+module.exports = { authenticateToken, requireAdmin };
