@@ -8,7 +8,10 @@ const {
   deleteCategoryController,
 } = require("../controlllers/categoryController");
 
-const { authenticateToken, requireAdmin } = require("../middleware/authMiddleware");
+const {
+  authenticateToken,
+  requireAdmin,
+} = require("../middleware/authMiddleware");
 
 const express = require("express");
 const router = express.Router();
@@ -19,6 +22,11 @@ router.get("/search", searchCategoriesController);
 router.get("/:id", getCategoryByIdController);
 router.post("/", authenticateToken, requireAdmin, createCategoryController);
 router.put("/:id", authenticateToken, requireAdmin, updateCategoryController);
-router.delete("/:id", authenticateToken, requireAdmin, deleteCategoryController);
+router.delete(
+  "/:id",
+  authenticateToken,
+  requireAdmin,
+  deleteCategoryController,
+);
 
 module.exports = router;
