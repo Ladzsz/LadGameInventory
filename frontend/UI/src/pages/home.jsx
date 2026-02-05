@@ -3,9 +3,8 @@ import "../assets/styles/home.css";
 import { Link } from "react-router-dom";
 
 const HomePage = () => {
-
-  const token = localStorage.getItem('token');
-  const user = token ? JSON.parse(atob(token.split('.')[1])) : null;
+  const token = localStorage.getItem("token");
+  const user = token ? JSON.parse(atob(token.split(".")[1])) : null;
 
   return (
     <main className="homepage">

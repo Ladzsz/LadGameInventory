@@ -8,7 +8,7 @@ const CategoryPage = () => {
   const [loading, setLoading] = useState(true);
 
   const token = localStorage.getItem("token");
-  const user = token ? JSON.parse(atob(token.split('.')[1])) : null;
+  const user = token ? JSON.parse(atob(token.split(".")[1])) : null;
 
   // Fetch all categories
   const fetchCategories = async () => {

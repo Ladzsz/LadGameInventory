@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 function Header() {
   const [token, setToken] = useState(localStorage.getItem("token"));
-  const user = token ? JSON.parse(atob(token.split('.')[1])) : null;
+  const user = token ? JSON.parse(atob(token.split(".")[1])) : null;
 
   // Re-check token when component mounts or when storage changes
   useEffect(() => {

@@ -19,9 +19,7 @@ function AuthForm() {
         ? "http://localhost:5000/api/users/login"
         : "http://localhost:5000/api/users";
     const body =
-      mode === "login"
-        ? { email, password }
-        : { username, email, password};
+      mode === "login" ? { email, password } : { username, email, password };
 
     //try block to make API call
     try {
