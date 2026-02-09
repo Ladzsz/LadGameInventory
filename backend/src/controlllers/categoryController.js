@@ -14,7 +14,7 @@ const getAllCategories = async (req, res) => {
     res.status(200).json(categories);
   } catch (err) {
     console.error("ERROR:", err.message);
-    next(err);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -27,7 +27,7 @@ const getCategoryByIdController = async (req, res) => {
     res.status(200).json(category);
   } catch (err) {
     console.error("ERROR:", err.message);
-    next(err);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -38,7 +38,7 @@ const createCategoryController = async (req, res) => {
     res.status(201).json(newCategory);
   } catch (err) {
     console.error("ERROR:", err.message);
-    next(err);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -56,7 +56,7 @@ const updateCategoryController = async (req, res) => {
     res.status(200).json(updatedCategory);
   } catch (err) {
     console.error("ERROR:", err.message);
-    next(err);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -67,7 +67,7 @@ const searchCategoriesController = async (req, res) => {
     res.status(200).json(categories);
   } catch (err) {
     console.error("ERROR:", err.message);
-    next(err);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -77,7 +77,7 @@ const deleteCategoryController = async (req, res) => {
     res.status(204).send();
   } catch (err) {
     console.error("ERROR:", err.message);
-    next(err);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 

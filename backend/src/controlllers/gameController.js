@@ -16,7 +16,7 @@ const getAllGamesConroller = async (req, res) => {
     res.status(200).json(games);
   } catch (err) {
     console.error("ERROR:", err.message);
-    next(err);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -29,7 +29,7 @@ const getGameByIdController = async (req, res) => {
     res.status(200).json(game);
   } catch (err) {
     console.error("ERROR:", err.message);
-    next(err);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -40,7 +40,7 @@ const searchGameController = async (req, res) => {
     res.status(200).json(games);
   } catch (err) {
     console.error("ERROR:", err.message);
-    next(err);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -57,7 +57,7 @@ const createGameController = async (req, res) => {
     res.status(201).json(newGame);
   } catch (err) {
     console.error("ERROR:", err.message);
-    next(err);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -78,7 +78,7 @@ const updateGameController = async (req, res) => {
     res.status(200).json(updatedGame);
   } catch (err) {
     console.error("ERROR:", err.message);
-    next(err);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -88,7 +88,7 @@ const deleteGameController = async (req, res) => {
     res.status(204).send();
   } catch (err) {
     console.error("ERROR:", err.message);
-    next(err);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -99,7 +99,7 @@ const getGamesByCategoryController = async (req, res) => {
     res.status(200).json(games);
   } catch (err) {
     console.error("ERROR:", err.message);
-    next(err);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -110,7 +110,7 @@ const getGamesByUserController = async (req, res) => {
     res.status(200).json(games);
   } catch (err) {
     console.error("ERROR:", err.message);
-    next(err);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 

@@ -2,12 +2,13 @@ import { Navigate } from "react-router-dom";
 
 const ProtectedRoute = ({ children, requireAdmin = false }) => {
   const token = localStorage.getItem("token");
-  const user = JSON.parse(atob(token.split(".")[1]));
 
-  // Check if logged in
-  if (!token) {
+  //if no token, redirect to login
+   if (!token) {
     return <Navigate to="/login" replace />;
   }
+
+  const user = JSON.parse(atob(token.split(".")[1]));
 
   // If admin required, check admin status
   if (requireAdmin) {

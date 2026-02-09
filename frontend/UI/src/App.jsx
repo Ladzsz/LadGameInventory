@@ -10,14 +10,24 @@ import CategoryPage from "./pages/categoryPage";
 import CategoryForm from "./pages/categoryForm";
 import AuthForm from "./pages/loginForm";
 import ProtectedRoute from "./components/protectedRoute";
+import ErrorPage from "./components/error";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState } from "react";
+
 
 function App() {
+
+  const [isErrorPage, setIsErrorPage] = useState(false);
+
   return (
     <>
       <Header />
-      <Content>
+      
+      <Content isErrorPage={isErrorPage}>
+        
         <Routes>
+
+
           <Route path="/login" element={<AuthForm />} />
           <Route path="/" element={<HomePage />} />
 
@@ -62,6 +72,14 @@ function App() {
           {/* unProtected routes */}
           <Route path="/games" element={<GamePage />} />
           <Route path="/categories" element={<CategoryPage />} />
+
+           <Route path="*" element={
+            <ErrorPage 
+              onMount={() => setIsErrorPage(true)}
+              onUnmount={() => setIsErrorPage(false)}
+            />
+          } />
+
         </Routes>
       </Content>
       <Footer />
