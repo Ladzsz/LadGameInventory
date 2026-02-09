@@ -9,28 +9,28 @@ const {
 
 //contoller funcctions for user
 
-const getUsersController = async (req, res) => {
-  try {
-    const users = await getUsers();
-    res.status(200).json(users);
-  } catch (err) {
-    console.error("ERROR:", err.message);
-      res.status(500).json({ error: "Internal server error" });
-  }
-};
+// const getUsersController = async (req, res) => {
+//   try {
+//     const users = await getUsers();
+//     res.status(200).json(users);
+//   } catch (err) {
+//     console.error("ERROR:", err.message);
+//       res.status(500).json({ error: "Internal server error" });
+//   }
+// };
 
-const getUserByIdController = async (req, res) => {
-  try {
-    const user = await getUserById(req.params.id);
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
-    }
-    res.status(200).json(user);
-  } catch (err) {
-    console.error("ERROR:", err.message);
-      res.status(500).json({ error: "Internal server error" });
-  }
-};
+// const getUserByIdController = async (req, res) => {
+//   try {
+//     const user = await getUserById(req.params.id);
+//     if (!user) {
+//       return res.status(404).json({ error: "User not found" });
+//     }
+//     res.status(200).json(user);
+//   } catch (err) {
+//     console.error("ERROR:", err.message);
+//       res.status(500).json({ error: "Internal server error" });
+//   }
+// };
 
 const createUserController = async (req, res) => {
   try {
@@ -104,8 +104,6 @@ const deleteUserController = async (req, res) => {
 };
 
 module.exports = {
-  getUsersController,
-  getUserByIdController,
   createUserController,
   updateUserController,
   deleteUserController,

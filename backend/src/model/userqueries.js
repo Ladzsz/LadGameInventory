@@ -4,15 +4,15 @@ const jwt = require("jsonwebtoken");
 
 //user queries for CRUD operations
 
-const getUsers = async () => {
-  const res = await pool.query("SELECT * FROM users ORDER BY id ASC");
-  return res.rows;
-};
+// const getUsers = async () => {
+//   const res = await pool.query("SELECT * FROM users ORDER BY id ASC");
+//   return res.rows;
+// };
 
-const getUserById = async (id) => {
-  const res = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
-  return res.rows[0];
-};
+// const getUserById = async (id) => {
+//   const res = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
+//   return res.rows[0];
+// };
 
 const createUser = async (username, email, password, is_admin = false) => {
   // Hash the password
@@ -83,8 +83,6 @@ const deleteUser = async (id) => {
 };
 
 module.exports = {
-  getUsers,
-  getUserById,
   createUser,
   updateUser,
   deleteUser,
