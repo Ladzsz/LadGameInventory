@@ -29,10 +29,10 @@ function AuthForm() {
         body: JSON.stringify(body),
       });
 
-      //handling response
+      //handling response if email  and user exist or not
       if (!response.ok) {
         const errData = await response.json();
-        throw new Error(errData.message || "Something went wrong");
+        throw new Error(errData.message || "User or email already taken");
       }
 
       //success block
