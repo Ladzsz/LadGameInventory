@@ -14,20 +14,15 @@ import ErrorPage from "./components/error";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 
-
 function App() {
-
   const [isErrorPage, setIsErrorPage] = useState(false);
 
   return (
     <>
       <Header />
-      
+
       <Content isErrorPage={isErrorPage}>
-        
         <Routes>
-
-
           <Route path="/login" element={<AuthForm />} />
           <Route path="/" element={<HomePage />} />
 
@@ -73,13 +68,15 @@ function App() {
           <Route path="/games" element={<GamePage />} />
           <Route path="/categories" element={<CategoryPage />} />
 
-           <Route path="*" element={
-            <ErrorPage 
-              onMount={() => setIsErrorPage(true)}
-              onUnmount={() => setIsErrorPage(false)}
-            />
-          } />
-
+          <Route
+            path="*"
+            element={
+              <ErrorPage
+                onMount={() => setIsErrorPage(true)}
+                onUnmount={() => setIsErrorPage(false)}
+              />
+            }
+          />
         </Routes>
       </Content>
       <Footer />

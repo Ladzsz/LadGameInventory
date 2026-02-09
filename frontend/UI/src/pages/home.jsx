@@ -57,7 +57,6 @@ const HomePage = () => {
             Add New Category
           </Link>
         ) : null}
-        
       </section>
     </main>
   );

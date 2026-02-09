@@ -4,7 +4,7 @@ const ProtectedRoute = ({ children, requireAdmin = false }) => {
   const token = localStorage.getItem("token");
 
   //if no token, redirect to login
-   if (!token) {
+  if (!token) {
     return <Navigate to="/login" replace />;
   }
 
