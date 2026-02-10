@@ -1,6 +1,4 @@
 const {
-  getUsers,
-  getUserById,
   createUser,
   updateUser,
   deleteUser,
@@ -49,21 +47,17 @@ const createUserController = async (req, res) => {
 };
 
 const updateUserController = async (req, res) => {
-  try {
-    const { username, email, password, is_admin } = req.body;
-
-    // Only allow admin users to update is_admin
-    let adminValue = undefined;
-    if (req.user && req.user.is_admin) {
-      adminValue = is_admin; // admin can update this
-    }
-
+   try {
+    const { username, email, password } = req.body;
+    
+    const userId = req.user.id;  // Use ID from JWT token
+    
     const updatedUser = await updateUser(
-      req.params.id,
+      userId,  
       username,
       email,
       password,
-      adminValue,
+      undefined 
     );
     if (!updatedUser) {
       return res.status(404).json({ error: "User not found" });
@@ -95,7 +89,10 @@ const loginUserController = async (req, res) => {
 
 const deleteUserController = async (req, res) => {
   try {
-    await deleteUser(req.params.id);
+
+    const userId = req.user.id; // Use ID from JWT token
+    
+    await deleteUser(userId);
     res.status(204).send();
   } catch (err) {
     console.error("ERROR:", err.message);

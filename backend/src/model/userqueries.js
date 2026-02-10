@@ -35,7 +35,7 @@ const updateUser = async (id, username, email, password, is_admin) => {
   // Update user in database
   const res = await pool.query(
     `UPDATE users 
-     SET username = $1, email = $2, password = COALESCE($3, password), is_admin = COALESCE($4, is_admin)
+     SET username = COALESCE($1, username), email = COALESCE($2, email), password = COALESCE($3, password), is_admin = COALESCE($4, is_admin)
      WHERE id = $5 
      RETURNING *`,
     [username, email, hashedPassword, is_admin, id],
