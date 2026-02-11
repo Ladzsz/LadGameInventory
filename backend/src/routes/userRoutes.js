@@ -7,14 +7,15 @@ const {
   resetPasswordController,
 } = require("../controlllers/userController");
 
-const authenticateToken = require("../middleware/authMiddleware").authenticateToken;
+const authenticateToken =
+  require("../middleware/authMiddleware").authenticateToken;
 
 const express = require("express");
 const router = express.Router();
 
 //user routes
-router.post('/forgot-password', forgotPasswordController);
-router.post('/reset-password', resetPasswordController);
+router.post("/forgot-password", forgotPasswordController);
+router.post("/reset-password", resetPasswordController);
 router.post("/login", loginUserController);
 router.post("/", createUserController);
 router.put("/me", authenticateToken, updateUserController);

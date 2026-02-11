@@ -101,5 +101,5 @@ module.exports = {
   deleteUser,
   loginUser,
   findUserByEmail,
-  updateuserPassword
+  updateuserPassword,
 };

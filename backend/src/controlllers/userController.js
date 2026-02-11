@@ -4,11 +4,11 @@ const {
   deleteUser,
   loginUser,
   findUserByEmail,
-  updateuserPassword
+  updateuserPassword,
 } = require("../model/userqueries");
 
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 const { sendPasswordResetEmail } = require("../utils/emailService");
 
 //contoller funcctions for user
@@ -53,17 +53,17 @@ const createUserController = async (req, res) => {
 };
 
 const updateUserController = async (req, res) => {
-   try {
+  try {
     const { username, email, password } = req.body;
-    
-    const userId = req.user.id;  // Use ID from JWT token
-    
+
+    const userId = req.user.id; // Use ID from JWT token
+
     const updatedUser = await updateUser(
-      userId,  
+      userId,
       username,
       email,
       password,
-      undefined 
+      undefined,
     );
     if (!updatedUser) {
       return res.status(404).json({ error: "User not found" });
@@ -95,9 +95,8 @@ const loginUserController = async (req, res) => {
 
 const deleteUserController = async (req, res) => {
   try {
-
     const userId = req.user.id; // Use ID from JWT token
-    
+
     await deleteUser(userId);
     res.status(204).send();
   } catch (err) {
@@ -109,69 +108,67 @@ const deleteUserController = async (req, res) => {
 const forgotPasswordController = async (req, res) => {
   try {
     const { email } = req.body;
-    
+
     const user = await findUserByEmail(email);
-    
+
     // if email doesnt exist return
     if (!user) {
-      return res.json({ 
-        message: 'If that email exists, a reset link has been sent' 
+      return res.json({
+        message: "If that email exists, a reset link has been sent",
       });
     }
-    
+
     // Generate reset token
     const resetToken = jwt.sign(
-      { 
-        userId: user.id, 
-        type: 'password-reset' 
+      {
+        userId: user.id,
+        type: "password-reset",
       },
       process.env.JWT_SECRET,
-      { expiresIn: '30m' }
+      { expiresIn: "30m" },
     );
-    
+
     // Send email
     await sendPasswordResetEmail(email, resetToken);
-    
-    res.json({ 
-      message: 'If that email exists, a reset link has been sent' 
+
+    res.json({
+      message: "If that email exists, a reset link has been sent",
     });
-    
   } catch (err) {
-    console.error('Forgot password error:', err);
-    res.status(500).json({ error: 'Internal server error' });
+    console.error("Forgot password error:", err);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
 const resetPasswordController = async (req, res) => {
   try {
     const { token, newPassword } = req.body;
-    
+
     // Verify token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    
+
     // Check token type
-    if (decoded.type !== 'password-reset') {
-      return res.status(400).json({ error: 'Invalid token type' });
+    if (decoded.type !== "password-reset") {
+      return res.status(400).json({ error: "Invalid token type" });
     }
-    
+
     // Hash new password
     const hashedPassword = await bcrypt.hash(newPassword, 10);
-    
+
     // Update password in database
     await updateuserPassword(decoded.userId, hashedPassword);
-    
-    res.json({ message: 'Password reset successful' });
-    
+
+    res.json({ message: "Password reset successful" });
   } catch (err) {
-    if (err.name === 'TokenExpiredError') {
-      return res.status(400).json({ error: 'Reset link has expired' });
+    if (err.name === "TokenExpiredError") {
+      return res.status(400).json({ error: "Reset link has expired" });
     }
-    if (err.name === 'JsonWebTokenError') {
-      return res.status(400).json({ error: 'Invalid reset link' });
+    if (err.name === "JsonWebTokenError") {
+      return res.status(400).json({ error: "Invalid reset link" });
     }
-    
-    console.error('Reset password error:', err);
-    res.status(500).json({ error: 'Internal server error' });
+
+    console.error("Reset password error:", err);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -181,5 +178,5 @@ module.exports = {
   deleteUserController,
   loginUserController,
   forgotPasswordController,
-  resetPasswordController
+  resetPasswordController,
 };
