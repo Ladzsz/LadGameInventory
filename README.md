@@ -6,7 +6,7 @@ Users can **CRUD games by category/genre** (Action, Platformer, Shooter, Horror,
 ---
 
 ## 🛠️ Features
-- User authentication (optional, can be added later)
+- User authentication 
 - Add, view, update, and delete games
 - Organize games by genre/category
 - Frontend powered by **React JSX**
