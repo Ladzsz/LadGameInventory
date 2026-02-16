@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import "../assets/styles/loginform.css";
 
 function AuthForm() {
   //setting states
@@ -91,24 +93,33 @@ function AuthForm() {
         />
       </div>
 
-      <div className="game-form__actions">
+      <div id="login-form__actions" className="game-form__actions">
         <button className="btn btn--primary" type="submit">
           {mode === "login" ? "Login" : "Register"}
         </button>
-      </div>
 
-      <p
-        className="game-form__toggled"
-        style={{
-          cursor: "pointer",
-          color: "blue",
-          display: "inline-block",
-          marginTop: "10px",
-        }}
-        onClick={() => setMode(mode === "login" ? "register" : "login")}
-      >
-        {mode === "login" ? "Create an account?" : "Already have an account?"}
-      </p>
+        <div id="bottom-text-div">
+          <p
+            className="game-form__toggled"
+            style={{
+              cursor: "pointer",
+              color: "blue",
+              display: "inline-block",
+            }}
+            onClick={() => setMode(mode === "login" ? "register" : "login")}
+          >
+            {mode === "login"
+              ? "Create an account?"
+              : "Already have an account?"}
+          </p>
+
+          {mode === "login" && (
+            <Link to="/forgot-pass" style={{ color: "blue" }}>
+              Forgot Password?
+            </Link>
+          )}
+        </div>
+      </div>
     </form>
   );
 }

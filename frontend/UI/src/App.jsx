@@ -9,6 +9,7 @@ import GamePage from "./pages/gamepage";
 import CategoryPage from "./pages/categoryPage";
 import CategoryForm from "./pages/categoryForm";
 import AuthForm from "./pages/loginForm";
+import ForgotPass from "./pages/forgotpass";
 import ProtectedRoute from "./components/protectedRoute";
 import ErrorPage from "./components/error";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -67,6 +68,7 @@ function App() {
           {/* unProtected routes */}
           <Route path="/games" element={<GamePage />} />
           <Route path="/categories" element={<CategoryPage />} />
+          <Route path="/forgot-pass" element={<ForgotPass />} />
 
           <Route
             path="*"
