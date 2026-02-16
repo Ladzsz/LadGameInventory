@@ -63,7 +63,7 @@ const updateUserController = async (req, res) => {
       username,
       email,
       password,
-      undefined,
+      undefined, // if admin making other admins logic is wanted later update here and the body as well as incorporating logic
     );
     if (!updatedUser) {
       return res.status(404).json({ error: "User not found" });
