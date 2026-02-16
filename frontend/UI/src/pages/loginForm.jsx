@@ -114,7 +114,7 @@ function AuthForm() {
           </p>
 
           {mode === "login" && (
-            <Link to="/forgot-pass" style={{ color: "blue" }}>
+            <Link to="/forgot-password" style={{ color: "blue" }}>
               Forgot Password?
             </Link>
           )}

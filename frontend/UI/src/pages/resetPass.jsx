@@ -1,19 +1,23 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-function ForgotPass() {
+function ResetPass() {
   //setting state
-  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmpassword, setconfirmPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get("token");
 
   //function to handle submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     //setting up endpoint and body
-    const endpoint = "http://localhost:5000/api/users/forgot-password";
-    const body = { email };
+    const endpoint = "http://localhost:5000/api/users/reset-password";
+    const body = { token, newPassword: password };
 
     //try block to make API call
     try {
@@ -23,10 +27,15 @@ function ForgotPass() {
         body: JSON.stringify(body),
       });
 
+      //ensuring user must confirm their new password
+      if (confirmpassword !== password) {
+        throw new Error("Passwords do not match");
+      }
+
       //handling response if email sent fails
       if (!response.ok) {
         const errData = await response.json();
-        throw new Error(errData.message || "Something went wrong ");
+        throw new Error(errData.message || "something went wrong ");
       }
 
       //success block
@@ -45,16 +54,26 @@ function ForgotPass() {
   //rendering form
   return (
     <form id="forgotpassForm" className="game-form" onSubmit={handleSubmit}>
-      <h2 className="game-form__title">Enter Email</h2>
+      <h2 className="game-form__title">Enter New Password</h2>
 
       {error && <p className="game-form__error">{error}</p>}
 
       <div className="game-form__field">
-        <label>Email</label>
+        <label>New Password</label>
         <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+      </div>
+
+      <div className="game-form__field">
+        <label>Confirm Password</label>
+        <input
+          type="password"
+          value={confirmpassword}
+          onChange={(e) => setconfirmPassword(e.target.value)}
           required
         />
       </div>
@@ -78,4 +97,4 @@ function ForgotPass() {
   );
 }
 
-export default ForgotPass;
+export default ResetPass;
