@@ -15,6 +15,7 @@ function AuthForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   //function to handle submit
   const handleSubmit = async (e) => {
@@ -29,6 +30,7 @@ function AuthForm() {
 
     //try block to make API call
     try {
+      setLoading(true);
       const response = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -53,6 +55,8 @@ function AuthForm() {
       }
     } catch (err) {
       setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -98,9 +102,13 @@ function AuthForm() {
       </div>
 
       <div id="login-form__actions" className="game-form__actions">
-        <button className="btn btn--primary" type="submit">
-          {mode === "login" ? "Login" : "Register"}
-        </button>
+        {loading ? (
+  <p>Logging in...</p>
+) : (
+  <button className="btn btn--primary" type="submit">
+    {mode === "login" ? "Login" : "Register"}
+  </button>
+)}
 
         <div id="bottom-text-div">
           <p

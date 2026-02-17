@@ -40,6 +40,7 @@ const CategoryPage = () => {
 
   // Delete category
   const handleDelete = async (id) => {
+    setLoading(true); //added loading change to the delete try block so when a item is deleted whole page loads
     if (!token) {
       alert("You must be logged in to delete a category.");
       return;
@@ -64,6 +65,8 @@ const CategoryPage = () => {
       alert("Category deleted successfully.");
     } catch (err) {
       console.error("Failed to delete category:", err);
+    } finally {
+      setLoading(false);
     }
   };
 

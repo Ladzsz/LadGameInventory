@@ -9,6 +9,7 @@ function ForgotPass() {
   //setting state
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   //function to handle submit
@@ -20,6 +21,7 @@ function ForgotPass() {
 
     //try block to make API call
     try {
+      setLoading(true);
       const response = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -42,6 +44,8 @@ function ForgotPass() {
       }
     } catch (err) {
       setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -73,9 +77,13 @@ function ForgotPass() {
           Go back?
         </Link>
 
-        <button className="btn btn--primary" type="submit">
+        {loading ? (
+  <p>Sending Email...</p>
+) : (
+  <button className="btn btn--primary" type="submit">
           Submit
         </button>
+)}
       </div>
     </form>
   );

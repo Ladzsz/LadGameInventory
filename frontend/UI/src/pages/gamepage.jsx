@@ -44,6 +44,7 @@ const GamePage = () => {
     if (!window.confirm("Are you sure you want to delete this game?")) return;
 
     try {
+      setLoading(true); //added loading change to the delete try block so when a item is deleted whole page loads
       await fetch(`${GamesRoute}/${id}`, {
         method: "DELETE",
         headers: {
@@ -54,6 +55,8 @@ const GamePage = () => {
       alert("Game deleted successfully.");
     } catch (err) {
       console.error("Failed to delete game:", err);
+    } finally {
+      setLoading(false);
     }
   };
 

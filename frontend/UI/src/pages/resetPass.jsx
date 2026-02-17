@@ -11,6 +11,7 @@ function ResetPass() {
   const [password, setPassword] = useState("");
   const [confirmpassword, setconfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
@@ -24,6 +25,7 @@ function ResetPass() {
 
     //try block to make API call
     try {
+        setLoading(true);
       const response = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -51,6 +53,8 @@ function ResetPass() {
       }
     } catch (err) {
       setError(err.message);
+    } finally {
+        setLoading(false);
     }
   };
 
@@ -92,9 +96,14 @@ function ResetPass() {
           Go back?
         </Link>
 
-        <button className="btn btn--primary" type="submit">
+              {loading ? (
+  <p>Resetting password...</p>
+) : (
+  <button className="btn btn--primary" type="submit">
           Submit
         </button>
+)}
+
       </div>
     </form>
   );
