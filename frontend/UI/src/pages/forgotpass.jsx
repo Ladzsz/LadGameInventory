@@ -78,12 +78,12 @@ function ForgotPass() {
         </Link>
 
         {loading ? (
-  <p>Sending Email...</p>
-) : (
-  <button className="btn btn--primary" type="submit">
-          Submit
-        </button>
-)}
+          <p>Sending Email...</p>
+        ) : (
+          <button className="btn btn--primary" type="submit">
+            Submit
+          </button>
+        )}
       </div>
     </form>
   );

@@ -21,10 +21,7 @@ function AuthForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     //setting up endpoint and body based on mode
-    const endpoint =
-      mode === "login"
-        ? `${UserLoginRoute}`
-        : `${UserRoute}`;
+    const endpoint = mode === "login" ? `${UserLoginRoute}` : `${UserRoute}`;
     const body =
       mode === "login" ? { email, password } : { username, email, password };
 
@@ -100,7 +97,7 @@ function AuthForm() {
           required
         />
       </div>
-  <div id="login-form__actions" className="game-form__actions">
+      <div id="login-form__actions" className="game-form__actions">
         {loading ? (
           <p>Logging in...</p>
         ) : (
@@ -130,7 +127,7 @@ function AuthForm() {
             </Link>
           )}
         </div>
-    </div>
+      </div>
     </form>
   );
 }

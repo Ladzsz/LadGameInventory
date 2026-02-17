@@ -25,7 +25,7 @@ function ResetPass() {
 
     //try block to make API call
     try {
-        setLoading(true);
+      setLoading(true);
       const response = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -54,7 +54,7 @@ function ResetPass() {
     } catch (err) {
       setError(err.message);
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
   };
 
@@ -96,14 +96,13 @@ function ResetPass() {
           Go back?
         </Link>
 
-              {loading ? (
-  <p>Resetting password...</p>
-) : (
-  <button className="btn btn--primary" type="submit">
-          Submit
-        </button>
-)}
-
+        {loading ? (
+          <p>Resetting password...</p>
+        ) : (
+          <button className="btn btn--primary" type="submit">
+            Submit
+          </button>
+        )}
       </div>
     </form>
   );

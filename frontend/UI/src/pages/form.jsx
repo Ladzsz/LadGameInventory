@@ -37,9 +37,7 @@ function GameForm({ onSuccess }) {
       try {
         setLoading(true);
 
-        const url = gameId
-          ? `${GamesRoute}/${gameId}`
-          : `${GamesRoute}`;
+        const url = gameId ? `${GamesRoute}/${gameId}` : `${GamesRoute}`;
 
         const res = await fetch(url);
         if (!res.ok) throw new Error("Failed to fetch game(s)");
@@ -80,9 +78,7 @@ function GameForm({ onSuccess }) {
 
     // try block for inital API call
     try {
-      const url = gameId
-        ? `${GamesRoute}/${gameId}`
-        : `${GamesRoute}`;
+      const url = gameId ? `${GamesRoute}/${gameId}` : `${GamesRoute}`;
 
       const method = gameId ? "PUT" : "POST";
 

@@ -13,13 +13,13 @@
 }
 
 @media (max-width: 425px) {
-#login-form__actions {
+  #login-form__actions {
     font-size: 0.9em;
-}
+  }
 }
 
 @media (max-width: 375px) {
   #login-form__actions {
     font-size: 0.8em;
-}
+  }
 }
