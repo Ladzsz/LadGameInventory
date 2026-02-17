@@ -100,15 +100,14 @@ function AuthForm() {
           required
         />
       </div>
-
-      <div id="login-form__actions" className="game-form__actions">
+  <div id="login-form__actions" className="game-form__actions">
         {loading ? (
-  <p>Logging in...</p>
-) : (
-  <button className="btn btn--primary" type="submit">
-    {mode === "login" ? "Login" : "Register"}
-  </button>
-)}
+          <p>Logging in...</p>
+        ) : (
+          <button className="btn btn--primary" type="submit">
+            {mode === "login" ? "Login" : "Register"}
+          </button>
+        )}
 
         <div id="bottom-text-div">
           <p
@@ -131,7 +130,7 @@ function AuthForm() {
             </Link>
           )}
         </div>
-      </div>
+    </div>
     </form>
   );
 }

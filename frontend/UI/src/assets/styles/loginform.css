@@ -11,3 +11,15 @@
   justify-content: space-between;
   margin-top: 30px;
 }
+
+@media (max-width: 425px) {
+#login-form__actions {
+    font-size: 0.9em;
+}
+}
+
+@media (max-width: 375px) {
+  #login-form__actions {
+    font-size: 0.8em;
+}
+}
