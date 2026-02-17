@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+//importing routes saved as ENV this will allow for global variable manipulation
+//as opposed to being hard coded in each file that uses it.
+const ForgotPassRoute = import.meta.env.VITE_FORGOTPASS_ROUTE;
 
 function ForgotPass() {
   //setting state
@@ -12,7 +15,7 @@ function ForgotPass() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     //setting up endpoint and body
-    const endpoint = "http://localhost:5000/api/users/forgot-password";
+    const endpoint = `${ForgotPassRoute}`;
     const body = { email };
 
     //try block to make API call

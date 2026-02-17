@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../assets/styles/gamepage.css";
+//importing routes saved as ENV this will allow for global variable manipulation
+//as opposed to being hard coded in each file that uses it.
+const GamesRoute = import.meta.env.VITE_GAMES_ROUTE;
+const SearchGameRoute = import.meta.env.VITE_GAMESEARCH_ROUTE;
 
 const GamePage = () => {
   const [games, setGames] = useState([]);
@@ -13,7 +17,7 @@ const GamePage = () => {
   const fetchGames = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/games", {
+      const res = await fetch(`${GamesRoute}`, {
         method: "GET",
       });
       const data = await res.json();
@@ -25,7 +29,7 @@ const GamePage = () => {
     }
   };
 
-  // Load games on mount
+  // use effect to fetch games after dom loads
   useEffect(() => {
     fetchGames();
   }, []);
@@ -40,7 +44,7 @@ const GamePage = () => {
     if (!window.confirm("Are you sure you want to delete this game?")) return;
 
     try {
-      await fetch(`http://localhost:5000/api/games/${id}`, {
+      await fetch(`${GamesRoute}/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -66,7 +70,7 @@ const GamePage = () => {
     setLoading(true);
     try {
       const res = await fetch(
-        `http://localhost:5000/api/games/search?name=${encodeURIComponent(value)}`,
+        `${SearchGameRoute}?name=${encodeURIComponent(value)}`,
       );
       const data = await res.json();
       setGames(data);

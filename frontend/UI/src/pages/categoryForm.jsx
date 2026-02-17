@@ -3,6 +3,10 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 // NOTE FROM Ladzsz will use the same styles as game form for consistency
 
+//importing routes saved as ENV this will allow for global variable manipulation
+//as opposed to being hard coded in each file that uses it.
+const CategoryRoute = import.meta.env.VITE_CATEGORIES_ROUTE;
+
 function CategoryForm({ onSuccess }) {
   // grab categoryId from URL
   const { id: categoryId } = useParams();
@@ -19,7 +23,7 @@ function CategoryForm({ onSuccess }) {
 
   // fetch categories
   useEffect(() => {
-    fetch("http://localhost:5000/api/categories")
+    fetch(`${CategoryRoute}`)
       .then((res) => res.json())
       .then((data) => setCategories(data))
       .catch((err) => console.error("Failed to load categories:", err));
@@ -32,8 +36,8 @@ function CategoryForm({ onSuccess }) {
         setLoading(true);
 
         const url = categoryId
-          ? `http://localhost:5000/api/categories/${categoryId}`
-          : `http://localhost:5000/api/categories`;
+          ? `${CategoryRoute}/${categoryId}`
+          : `${CategoryRoute}`;
 
         const res = await fetch(url);
         if (!res.ok) throw new Error("Failed to fetch category(s)");
@@ -71,8 +75,8 @@ function CategoryForm({ onSuccess }) {
     // try block for inital API call
     try {
       const url = categoryId
-        ? `http://localhost:5000/api/categories/${categoryId}`
-        : "http://localhost:5000/api/categories";
+        ? `${CategoryRoute}/${categoryId}`
+        : `${CategoryRoute}`;
 
       const method = categoryId ? "PUT" : "POST";
 

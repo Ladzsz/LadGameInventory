@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+//importing routes saved as ENV this will allow for global variable manipulation
+//as opposed to being hard coded in each file that uses it.
+const CategoryRoute = import.meta.env.VITE_CATEGORIES_ROUTE;
+const GamesRoute = import.meta.env.VITE_GAMES_ROUTE;
 
 function GameForm({ onSuccess }) {
   // grab gameId from URL
@@ -21,7 +25,7 @@ function GameForm({ onSuccess }) {
 
   // fetch categories
   useEffect(() => {
-    fetch("http://localhost:5000/api/categories")
+    fetch(`${CategoryRoute}`)
       .then((res) => res.json())
       .then((data) => setCategories(data))
       .catch((err) => console.error("Failed to load categories:", err));
@@ -34,8 +38,8 @@ function GameForm({ onSuccess }) {
         setLoading(true);
 
         const url = gameId
-          ? `http://localhost:5000/api/games/${gameId}`
-          : `http://localhost:5000/api/games`;
+          ? `${GamesRoute}/${gameId}`
+          : `${GamesRoute}`;
 
         const res = await fetch(url);
         if (!res.ok) throw new Error("Failed to fetch game(s)");
@@ -77,8 +81,8 @@ function GameForm({ onSuccess }) {
     // try block for inital API call
     try {
       const url = gameId
-        ? `http://localhost:5000/api/games/${gameId}`
-        : "http://localhost:5000/api/games";
+        ? `${GamesRoute}/${gameId}`
+        : `${GamesRoute}`;
 
       const method = gameId ? "PUT" : "POST";
 

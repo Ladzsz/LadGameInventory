@@ -2,6 +2,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../assets/styles/loginform.css";
+//importing routes saved as ENV this will allow for global variable manipulation
+//as opposed to being hard coded in each file that uses it.
+const UserRoute = import.meta.env.VITE_USERS_ROUTE;
+const UserLoginRoute = import.meta.env.VITE_LOGIN_ROUTE;
 
 function AuthForm() {
   //setting states
@@ -18,8 +22,8 @@ function AuthForm() {
     //setting up endpoint and body based on mode
     const endpoint =
       mode === "login"
-        ? "http://localhost:5000/api/users/login"
-        : "http://localhost:5000/api/users";
+        ? `${UserLoginRoute}`
+        : `${UserRoute}`;
     const body =
       mode === "login" ? { email, password } : { username, email, password };
 

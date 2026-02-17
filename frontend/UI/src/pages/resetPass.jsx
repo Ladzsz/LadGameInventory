@@ -2,6 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+//importing routes saved as ENV this will allow for global variable manipulation
+//as opposed to being hard coded in each file that uses it.
+const ResetPassRoute = import.meta.env.VITE_RESETPASS_ROUTE;
 
 function ResetPass() {
   //setting state
@@ -16,7 +19,7 @@ function ResetPass() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     //setting up endpoint and body
-    const endpoint = "http://localhost:5000/api/users/reset-password";
+    const endpoint = `${ResetPassRoute}`;
     const body = { token, newPassword: password };
 
     //try block to make API call

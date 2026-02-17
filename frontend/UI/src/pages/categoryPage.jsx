@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../assets/styles/gamepage.css";
+//importing routes saved as ENV this will allow for global variable manipulation
+//as opposed to being hard coded in each file that uses it.
+const CategoryRoute = import.meta.env.VITE_CATEGORIES_ROUTE;
+const SearchCategoryRoute = import.meta.env.VITE_CATEGORYSEARCH_ROUTE;
 
 const CategoryPage = () => {
   const [categories, setCategories] = useState([]);
@@ -14,7 +18,7 @@ const CategoryPage = () => {
   const fetchCategories = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/categories", {
+      const res = await fetch(`${CategoryRoute}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -50,7 +54,7 @@ const CategoryPage = () => {
       return;
 
     try {
-      await fetch(`http://localhost:5000/api/categories/${id}`, {
+      await fetch(`${CategoryRoute}/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -76,7 +80,7 @@ const CategoryPage = () => {
     setLoading(true);
     try {
       const res = await fetch(
-        `http://localhost:5000/api/categories/search?name=${encodeURIComponent(value)}`,
+        `${SearchCategoryRoute}?name=${encodeURIComponent(value)}`,
       );
       const data = await res.json();
       setCategories(data);
